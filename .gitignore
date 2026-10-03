@@ -1,0 +1,6 @@
+src/build/fig*.png
+src/build/figsrc.html
+src/build/blocks.json
+src/build/sanaa-book.*
+src/build/_print.html
+__pycache__/

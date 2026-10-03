@@ -1,0 +1,144 @@
+<title>كتاب السنع</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap">
+<style>
+/* التخطيط: كتاب مدرسي رقمي من عمودين — فهرس ثابت يميناً ومتن مقروء يساراً؛ الوحدات تُفتتح بشريط سدو هندسي */
+:root{
+  --navy:#1F4E79;      /* الأزرق العميق: البنية والعناوين */
+  --gold:#B8860B;      /* الذهبي: الوسوم والزخرف */
+  --ink:#1c2633;       /* الحبر */
+  --paper:#fbfaf6;     /* الورق */
+  --sheet:#ffffff;     /* الصفحة */
+  --line:#dfe3e8;      /* الخطوط */
+  --muted:#5d6a78;
+  --tint-navy:#eaf1f8;
+  --tint-gold:#f8f1df;
+  --tint-law:#eef0f3;
+  --ok:#2e6b4a; --ok-bg:#e5f2ea;
+  --warn:#8a5a00; --warn-bg:#fbefd2;
+  --bad:#9b2c2c; --bad-bg:#f9e4e4;
+  --font:"Noto Naskh Arabic","Amiri","Traditional Arabic","Times New Roman",serif;
+  --s1:.82rem; --s2:.95rem; --s3:1.06rem; --s4:1.3rem; --s5:1.7rem; --s6:2.4rem; --s7:3.6rem;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --navy:#8fb8e0; --gold:#e0b64f; --ink:#e6e9ee; --paper:#11161d; --sheet:#171e27; --line:#2b3542; --muted:#9aa6b4;
+  --tint-navy:#18293b; --tint-gold:#2b2414; --tint-law:#1f252e;
+  --ok:#8fd1ac; --ok-bg:#15291f; --warn:#f0c46a; --warn-bg:#2d2310; --bad:#f0a3a3; --bad-bg:#311818; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --navy:#8fb8e0; --gold:#e0b64f; --ink:#e6e9ee; --paper:#11161d; --sheet:#171e27; --line:#2b3542; --muted:#9aa6b4;
+  --tint-navy:#18293b; --tint-gold:#2b2414; --tint-law:#1f252e;
+  --ok:#8fd1ac; --ok-bg:#15291f; --warn:#f0c46a; --warn-bg:#2d2310; --bad:#f0a3a3; --bad-bg:#311818; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:17px;line-height:1.95;direction:rtl;text-align:right}
+a{color:var(--navy)}
+a:focus-visible,summary:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
+h1,h2,h3,h4{text-wrap:balance;line-height:1.5;color:var(--navy);margin:0}
+p{margin:0}
+.wrap{display:grid;grid-template-columns:260px minmax(0,1fr);gap:40px;max-width:1240px;margin:0 auto;padding-inline:24px;padding-block:24px 80px}
+@media (max-width:960px){.wrap{grid-template-columns:minmax(0,1fr);gap:20px;padding-inline:16px}}
+
+/* الفهرس */
+.toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px);align-self:start;max-height:calc(100vh - 32px);overflow:auto;font-size:var(--s1);line-height:1.8;padding-inline-start:4px}
+.toc details{border-inline-start:2px solid var(--gold);padding-inline-start:12px}
+.toc summary{cursor:pointer;font-weight:700;color:var(--navy);font-size:var(--s2);list-style:none;padding-block:4px}
+.toc summary::-webkit-details-marker{display:none}
+.toc ol{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:2px}
+.toc a{text-decoration:none;color:var(--ink);display:block;padding:2px 6px;border-radius:4px}
+.toc a:hover{background:var(--tint-navy)}
+.toc .grp{color:var(--gold);font-weight:700;margin-top:10px;letter-spacing:.02em}
+@media (max-width:960px){.toc{position:static;max-height:none;background:var(--sheet);border:1px solid var(--line);border-radius:8px;padding:10px 12px}.toc details{border:0;padding:0}}
+
+main{min-width:0;display:grid;gap:56px}
+
+/* الغلاف */
+.cover{background:var(--sheet);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.cover .band{height:22px;background-color:var(--navy)}
+.cover .inner{padding:40px clamp(18px,5vw,56px) 36px;display:grid;gap:14px}
+.cover .eyebrow{color:var(--gold);font-weight:700;font-size:var(--s2);letter-spacing:.04em}
+.cover h1{font-size:clamp(3rem,10vw,var(--s7));font-weight:700;line-height:1.2}
+.cover .sub{font-size:var(--s4);color:var(--ink);max-width:40ch}
+.cover .motto{font-size:var(--s3);color:var(--muted)}
+.cover dl{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px 24px;margin:14px 0 0;font-size:var(--s2)}
+.cover dt{color:var(--muted);font-size:var(--s1)}
+.cover dd{margin:0;font-weight:600}
+.sadu{display:block;width:100%;height:22px}
+
+/* الأقسام */
+section.part{background:var(--sheet);border:1px solid var(--line);border-radius:6px;padding:clamp(18px,4vw,44px);display:grid;gap:18px;scroll-margin-top:16px}
+.part-head{display:grid;gap:4px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.eyebrow{color:var(--gold);font-weight:700;font-size:var(--s2)}
+.part-head h2{font-size:var(--s6)}
+.part-head .lead{font-size:var(--s3);color:var(--muted);max-width:68ch}
+h3{font-size:var(--s5);margin-top:14px;scroll-margin-top:16px}
+h4{font-size:var(--s3);margin-top:6px}
+.prose{display:grid;gap:12px;max-width:72ch}
+ul.list,ol.list{margin:0;padding-inline-start:1.4em;display:grid;gap:6px;max-width:72ch}
+.muted{color:var(--muted)}
+.small{font-size:var(--s1)}
+
+/* المربعات */
+.box{border-radius:6px;padding:14px 18px;display:grid;gap:8px;max-width:76ch}
+.box .tag{font-weight:700;font-size:var(--s1);letter-spacing:.03em}
+.asl{background:var(--tint-navy)} .asl .tag{color:var(--navy)}
+.mawruth{background:var(--tint-gold)} .mawruth .tag{color:var(--gold)}
+.law{background:var(--tint-law);border-inline-start:3px solid var(--navy)} .law .tag{color:var(--navy)}
+.act{border:1px dashed var(--gold)} .act .tag{color:var(--gold)}
+.edit{border:1px solid var(--line);background:var(--paper)} .edit .tag{color:var(--muted)}
+.quote{font-size:var(--s3);font-weight:600}
+.src{font-size:var(--s1);color:var(--muted)}
+.verse{font-weight:600;color:var(--ink);text-align:center;padding-block:4px}
+
+/* شارات التوثيق */
+.chip{display:inline-block;font-size:.75rem;font-weight:700;padding:0 8px;border-radius:999px;line-height:1.8;vertical-align:middle;white-space:nowrap}
+.chip.ok{background:var(--ok-bg);color:var(--ok)}
+.chip.warn{background:var(--warn-bg);color:var(--warn)}
+.chip.bad{background:var(--bad-bg);color:var(--bad)}
+.chip.lv{background:var(--tint-navy);color:var(--navy)}
+
+/* الجداول */
+.tbl{overflow-x:auto;max-width:100%}
+table{border-collapse:collapse;width:100%;font-size:var(--s2);min-width:520px}
+th,td{border:1px solid var(--line);padding:8px 10px;vertical-align:top;text-align:right}
+th{background:var(--navy);color:var(--sheet);font-weight:700}
+tbody tr:nth-child(even) td{background:var(--paper)}
+td.c{text-align:center;font-variant-numeric:tabular-nums}
+.mk{display:inline-block;width:14px;height:14px;border-radius:50%;vertical-align:middle;border:2px solid var(--navy)}
+.mk.f{background:var(--navy)}
+.mk.h{background:linear-gradient(to left,var(--navy) 50%,transparent 50%)}
+.mk.r{border-color:var(--gold)}
+
+/* مستويات */
+.levels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:760px){.levels{grid-template-columns:minmax(0,1fr)}}
+.lvl{border:1px solid var(--line);border-radius:6px;padding:12px 14px;display:grid;gap:6px;align-content:start}
+.lvl h5{margin:0;font-size:var(--s2);color:var(--navy)}
+.lvl ul{margin:0;padding-inline-start:1.2em;font-size:var(--s2);display:grid;gap:4px}
+
+/* المراجعة والتقييم */
+.assess{background:var(--tint-navy);border-radius:6px;padding:clamp(16px,3vw,28px);display:grid;gap:14px;margin-top:10px}
+.assess>h3{margin-top:0}
+.assess h4{color:var(--navy)}
+.assess ol{margin:0;padding-inline-start:1.5em;display:grid;gap:10px;max-width:76ch}
+.opts{display:flex;flex-wrap:wrap;gap:4px 18px;font-size:var(--s2);color:var(--ink);margin-top:2px}
+.key{background:var(--sheet);border:1px solid var(--line);border-radius:6px;padding:8px 14px}
+.key summary{cursor:pointer;font-weight:700;color:var(--gold)}
+.key div{padding-top:8px;font-size:var(--s2);display:grid;gap:6px}
+.checklist{list-style:none;padding:0;margin:0;display:grid;gap:6px}
+.checklist li::before{content:"☐ ";color:var(--gold);font-weight:700}
+
+/* شريط الوحدة */
+.unit-band{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.unit-num{font-size:var(--s7);font-weight:700;color:var(--gold);line-height:1}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:760px){.grid2{grid-template-columns:minmax(0,1fr)}}
+figure{margin:0;display:grid;gap:6px}
+figcaption{font-size:var(--s1);color:var(--muted)}
+svg text{font-family:var(--font)}
+.fig{overflow-x:auto}
+footer.colophon{font-size:var(--s1);color:var(--muted);text-align:center;padding-top:10px}
+</style>

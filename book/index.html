@@ -1,0 +1,1504 @@
+<title>كتاب السنع</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap">
+<style>
+/* التخطيط: كتاب مدرسي رقمي من عمودين — فهرس ثابت يميناً ومتن مقروء يساراً؛ الوحدات تُفتتح بشريط سدو هندسي */
+:root{
+  --navy:#1F4E79;      /* الأزرق العميق: البنية والعناوين */
+  --gold:#B8860B;      /* الذهبي: الوسوم والزخرف */
+  --ink:#1c2633;       /* الحبر */
+  --paper:#fbfaf6;     /* الورق */
+  --sheet:#ffffff;     /* الصفحة */
+  --line:#dfe3e8;      /* الخطوط */
+  --muted:#5d6a78;
+  --tint-navy:#eaf1f8;
+  --tint-gold:#f8f1df;
+  --tint-law:#eef0f3;
+  --ok:#2e6b4a; --ok-bg:#e5f2ea;
+  --warn:#8a5a00; --warn-bg:#fbefd2;
+  --bad:#9b2c2c; --bad-bg:#f9e4e4;
+  --font:"Noto Naskh Arabic","Amiri","Traditional Arabic","Times New Roman",serif;
+  --s1:.82rem; --s2:.95rem; --s3:1.06rem; --s4:1.3rem; --s5:1.7rem; --s6:2.4rem; --s7:3.6rem;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --navy:#8fb8e0; --gold:#e0b64f; --ink:#e6e9ee; --paper:#11161d; --sheet:#171e27; --line:#2b3542; --muted:#9aa6b4;
+  --tint-navy:#18293b; --tint-gold:#2b2414; --tint-law:#1f252e;
+  --ok:#8fd1ac; --ok-bg:#15291f; --warn:#f0c46a; --warn-bg:#2d2310; --bad:#f0a3a3; --bad-bg:#311818; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --navy:#8fb8e0; --gold:#e0b64f; --ink:#e6e9ee; --paper:#11161d; --sheet:#171e27; --line:#2b3542; --muted:#9aa6b4;
+  --tint-navy:#18293b; --tint-gold:#2b2414; --tint-law:#1f252e;
+  --ok:#8fd1ac; --ok-bg:#15291f; --warn:#f0c46a; --warn-bg:#2d2310; --bad:#f0a3a3; --bad-bg:#311818; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:17px;line-height:1.95;direction:rtl;text-align:right}
+a{color:var(--navy)}
+a:focus-visible,summary:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
+h1,h2,h3,h4{text-wrap:balance;line-height:1.5;color:var(--navy);margin:0}
+p{margin:0}
+.wrap{display:grid;grid-template-columns:260px minmax(0,1fr);gap:40px;max-width:1240px;margin:0 auto;padding-inline:24px;padding-block:24px 80px}
+@media (max-width:960px){.wrap{grid-template-columns:minmax(0,1fr);gap:20px;padding-inline:16px}}
+
+/* الفهرس */
+.toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px);align-self:start;max-height:calc(100vh - 32px);overflow:auto;font-size:var(--s1);line-height:1.8;padding-inline-start:4px}
+.toc details{border-inline-start:2px solid var(--gold);padding-inline-start:12px}
+.toc summary{cursor:pointer;font-weight:700;color:var(--navy);font-size:var(--s2);list-style:none;padding-block:4px}
+.toc summary::-webkit-details-marker{display:none}
+.toc ol{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:2px}
+.toc a{text-decoration:none;color:var(--ink);display:block;padding:2px 6px;border-radius:4px}
+.toc a:hover{background:var(--tint-navy)}
+.toc .grp{color:var(--gold);font-weight:700;margin-top:10px;letter-spacing:.02em}
+@media (max-width:960px){.toc{position:static;max-height:none;background:var(--sheet);border:1px solid var(--line);border-radius:8px;padding:10px 12px}.toc details{border:0;padding:0}}
+
+main{min-width:0;display:grid;gap:56px}
+
+/* الغلاف */
+.cover{background:var(--sheet);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.cover .band{height:22px;background-color:var(--navy)}
+.cover .inner{padding:40px clamp(18px,5vw,56px) 36px;display:grid;gap:14px}
+.cover .eyebrow{color:var(--gold);font-weight:700;font-size:var(--s2);letter-spacing:.04em}
+.cover h1{font-size:clamp(3rem,10vw,var(--s7));font-weight:700;line-height:1.2}
+.cover .sub{font-size:var(--s4);color:var(--ink);max-width:40ch}
+.cover .motto{font-size:var(--s3);color:var(--muted)}
+.cover dl{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px 24px;margin:14px 0 0;font-size:var(--s2)}
+.cover dt{color:var(--muted);font-size:var(--s1)}
+.cover dd{margin:0;font-weight:600}
+.sadu{display:block;width:100%;height:22px}
+
+/* الأقسام */
+section.part{background:var(--sheet);border:1px solid var(--line);border-radius:6px;padding:clamp(18px,4vw,44px);display:grid;gap:18px;scroll-margin-top:16px}
+.part-head{display:grid;gap:4px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.eyebrow{color:var(--gold);font-weight:700;font-size:var(--s2)}
+.part-head h2{font-size:var(--s6)}
+.part-head .lead{font-size:var(--s3);color:var(--muted);max-width:68ch}
+h3{font-size:var(--s5);margin-top:14px;scroll-margin-top:16px}
+h4{font-size:var(--s3);margin-top:6px}
+.prose{display:grid;gap:12px;max-width:72ch}
+ul.list,ol.list{margin:0;padding-inline-start:1.4em;display:grid;gap:6px;max-width:72ch}
+.muted{color:var(--muted)}
+.small{font-size:var(--s1)}
+
+/* المربعات */
+.box{border-radius:6px;padding:14px 18px;display:grid;gap:8px;max-width:76ch}
+.box .tag{font-weight:700;font-size:var(--s1);letter-spacing:.03em}
+.asl{background:var(--tint-navy)} .asl .tag{color:var(--navy)}
+.mawruth{background:var(--tint-gold)} .mawruth .tag{color:var(--gold)}
+.law{background:var(--tint-law);border-inline-start:3px solid var(--navy)} .law .tag{color:var(--navy)}
+.act{border:1px dashed var(--gold)} .act .tag{color:var(--gold)}
+.edit{border:1px solid var(--line);background:var(--paper)} .edit .tag{color:var(--muted)}
+.quote{font-size:var(--s3);font-weight:600}
+.src{font-size:var(--s1);color:var(--muted)}
+.verse{font-weight:600;color:var(--ink);text-align:center;padding-block:4px}
+
+/* شارات التوثيق */
+.chip{display:inline-block;font-size:.75rem;font-weight:700;padding:0 8px;border-radius:999px;line-height:1.8;vertical-align:middle;white-space:nowrap}
+.chip.ok{background:var(--ok-bg);color:var(--ok)}
+.chip.warn{background:var(--warn-bg);color:var(--warn)}
+.chip.bad{background:var(--bad-bg);color:var(--bad)}
+.chip.lv{background:var(--tint-navy);color:var(--navy)}
+
+/* الجداول */
+.tbl{overflow-x:auto;max-width:100%}
+table{border-collapse:collapse;width:100%;font-size:var(--s2);min-width:520px}
+th,td{border:1px solid var(--line);padding:8px 10px;vertical-align:top;text-align:right}
+th{background:var(--navy);color:var(--sheet);font-weight:700}
+tbody tr:nth-child(even) td{background:var(--paper)}
+td.c{text-align:center;font-variant-numeric:tabular-nums}
+.mk{display:inline-block;width:14px;height:14px;border-radius:50%;vertical-align:middle;border:2px solid var(--navy)}
+.mk.f{background:var(--navy)}
+.mk.h{background:linear-gradient(to left,var(--navy) 50%,transparent 50%)}
+.mk.r{border-color:var(--gold)}
+
+/* مستويات */
+.levels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:760px){.levels{grid-template-columns:minmax(0,1fr)}}
+.lvl{border:1px solid var(--line);border-radius:6px;padding:12px 14px;display:grid;gap:6px;align-content:start}
+.lvl h5{margin:0;font-size:var(--s2);color:var(--navy)}
+.lvl ul{margin:0;padding-inline-start:1.2em;font-size:var(--s2);display:grid;gap:4px}
+
+/* المراجعة والتقييم */
+.assess{background:var(--tint-navy);border-radius:6px;padding:clamp(16px,3vw,28px);display:grid;gap:14px;margin-top:10px}
+.assess>h3{margin-top:0}
+.assess h4{color:var(--navy)}
+.assess ol{margin:0;padding-inline-start:1.5em;display:grid;gap:10px;max-width:76ch}
+.opts{display:flex;flex-wrap:wrap;gap:4px 18px;font-size:var(--s2);color:var(--ink);margin-top:2px}
+.key{background:var(--sheet);border:1px solid var(--line);border-radius:6px;padding:8px 14px}
+.key summary{cursor:pointer;font-weight:700;color:var(--gold)}
+.key div{padding-top:8px;font-size:var(--s2);display:grid;gap:6px}
+.checklist{list-style:none;padding:0;margin:0;display:grid;gap:6px}
+.checklist li::before{content:"☐ ";color:var(--gold);font-weight:700}
+
+/* شريط الوحدة */
+.unit-band{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.unit-num{font-size:var(--s7);font-weight:700;color:var(--gold);line-height:1}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:760px){.grid2{grid-template-columns:minmax(0,1fr)}}
+figure{margin:0;display:grid;gap:6px}
+figcaption{font-size:var(--s1);color:var(--muted)}
+svg text{font-family:var(--font)}
+.fig{overflow-x:auto}
+footer.colophon{font-size:var(--s1);color:var(--muted);text-align:center;padding-top:10px}
+</style>
+
+<div class="wrap">
+<nav class="toc" aria-label="فهرس الكتاب">
+  <details open>
+    <summary>فهرس الكتاب</summary>
+    <ol>
+      <li class="grp">التمهيد</li>
+      <li><a href="#review">قراءة المجلس في المسودة</a></li>
+      <li><a href="#intro">التقديم</a></li>
+      <li><a href="#guide">دليل المعلم</a></li>
+      <li><a href="#g-matrix">مصفوفة النطاق والتتابع</a></li>
+      <li class="grp">الوحدات</li>
+      <li><a href="#u1">١. السنع: المفهوم والجذور</a></li>
+      <li><a href="#u2">٢. سنع المجلس</a></li>
+      <li><a href="#u3">٣. سنع الضيافة</a></li>
+      <li><a href="#u4">٤. الطريق والتواصل والزيارات</a></li>
+      <li><a href="#u5">٥. الأسرة والعلاقات</a></li>
+      <li><a href="#u6">٦. المناسبات والملبس</a></li>
+      <li><a href="#u7">٧. مكارم الأخلاق العامة</a></li>
+      <li><a href="#u8">٨. السنع الرقمي والمعاصر</a></li>
+      <li class="grp">الختام</li>
+      <li><a href="#research">مشروع «راوي السنع»</a></li>
+      <li><a href="#glossary">معجم المفردات</a></li>
+      <li><a href="#refs">ثبت المصادر</a></li>
+      <li><a href="#verify">سجلّ التوثيق</a></li>
+    </ol>
+  </details>
+</nav>
+
+<main>
+<header class="cover" id="cover">
+  <svg class="sadu" viewBox="0 0 400 22" preserveAspectRatio="none" aria-hidden="true">
+    <defs><pattern id="sd" width="22" height="22" patternUnits="userSpaceOnUse">
+      <rect width="22" height="22" style="fill:var(--navy)"/>
+      <path d="M0 22 L11 4 L22 22 Z" style="fill:var(--gold)"/>
+      <path d="M6 22 L11 13 L16 22 Z" style="fill:var(--navy)"/>
+    </pattern></defs>
+    <rect width="400" height="22" fill="url(#sd)"/>
+  </svg>
+  <div class="inner">
+    <div class="eyebrow">منهج تعليمي متدرّج · الصفوف من السادس إلى الثاني عشر</div>
+    <h1>السَّنْع</h1>
+    <p class="sub">آداب المجتمع الإماراتي وقيمه في المجلس والضيافة والأسرة والطريق والفضاء الرقمي</p>
+    <p class="motto">«الساير ساير على اسنعه»: كلٌّ يعامل الناس بما تربّى عليه من خُلُق.</p>
+    <dl>
+      <div><dt>طبيعة الإصدار</dt><dd>مراجعة علمية وإعادة تأليف منهجي للمسودة الأولى</dd></div>
+      <div><dt>الفئة المستهدفة</dt><dd>الحلقتان الثانية والثالثة (الصفوف ٦–١٢)</dd></div>
+      <div><dt>البنية</dt><dd>ثماني وحدات · تقييم في كل وحدة · مشروع بحثي ختامي</dd></div>
+      <div><dt>حالة النص</dt><dd>مسودة منهجية للتحكيم · أكتوبر ٢٠٢٦</dd></div>
+    </dl>
+  </div>
+</header>
+
+<!-- ===================== قراءة المجلس ===================== -->
+<section class="part" id="review">
+  <div class="part-head">
+    <div class="eyebrow">للمؤلف ولجنة المنهج</div>
+    <h2>قراءة المجلس العلمي في المسودة الأولى</h2>
+    <p class="lead">خلاصة ما انتهت إليه مراجعة المسودة الأصلية (مقدمة، وثلاثة فصول، وخاتمة، وعشرون حاشية) قبل تحويلها إلى منهج دراسي. شارك في المراجعة: التأصيل الشرعي، والتراث والأنثروبولوجيا، والتاريخ ومجتمع الإمارات، واللغة والتدقيق، وعلم الاجتماع، والتربية وإعداد المناهج، والقانون.</p>
+  </div>
+
+  <h3 id="rv-strengths">مواطن القوة التي بُني عليها</h3>
+  <ul class="list">
+    <li>مادة ميدانية أصيلة نادرة التدوين: تفاصيل المجلس، وترتيب الضيافة (العود، القهوة، الفوالة، الوليمة)، وعبارات المجاملة وردودها في الحواشي.</li>
+    <li>ربطٌ واعٍ بين السلوك ومصادره الثلاثة: الدين، والعُرف المحلي، والبيئة (البحر والصحراء والجبل).</li>
+    <li>توظيف الشعر النبطي والمثل الشعبي شاهداً على السلوك، وهو مدخل تعليمي جاذب للناشئة.</li>
+    <li>حسٌّ بيئي متقدّم (لا يصيد الصغير، ولا يقطع الأخضر) يصلح جسراً إلى قيم الاستدامة.</li>
+  </ul>
+
+  <h3 id="rv-fixes">تصويبات جوهرية لازمة</h3>
+  <div class="tbl"><table>
+    <thead><tr><th style="width:26%">الموضع في المسودة</th><th>الملاحظة</th><th style="width:30%">ما اعتُمد في هذه الطبعة</th></tr></thead>
+    <tbody>
+      <tr><td>المقدمة: «إنما بعثت لا أتمم مكارم الأخلاق»</td><td>خطأ طباعي يقلب المعنى إلى النفي. <span class="chip bad">جوهري</span></td><td>«إنما بُعثتُ لأُتمّم مكارم الأخلاق»، مع التخريج: أحمد في المسند بلفظ «صالح الأخلاق» (ط. الرسالة ١٤/٥١٣)، والحاكم في المستدرك.</td></tr>
+      <tr><td>«الشاعر سالم بن علي الجمري»</td><td>اسم مركّب من شاعرين: سالم بن محمد الجمري (١٩١٠–١٩٩١) وسالم بن علي العويس (١٨٨٧–١٩٥٥). <span class="chip bad">جوهري</span></td><td>يحدّد المؤلف صاحب البيتين بالرجوع إلى ديوانه، ثم يُصحَّح الاسم. حُجب البيتان مؤقتاً.</td></tr>
+      <tr><td>«وزارة الثقافة والشباب وتنمية المجتمع»</td><td>اسم مرحلة سابقة؛ والجهة الاتحادية الحالية «وزارة الثقافة». والمنهج المدرسي يصدر عادة عن وزارة التربية والتعليم.</td><td>تُترك كلمة الجهة المُصدِرة لها، ويُنسَّق مع برنامج «السنع الإماراتي» الذي أطلقته وزارة التربية والتعليم في مارس ٢٠٢٢.</td></tr>
+      <tr><td>«أثبتت الدراسات أن هذا الوضع يجعل المرء يأكل قدر طاقته»</td><td>ادّعاء علمي بلا مصدر.</td><td>حُذف الادعاء، وأُبقي وصف الجلسة بوصفها عُرفاً وأدباً.</td></tr>
+      <tr><td>«يجعلون العصا معلقة ترهيباً»</td><td>يتعارض مع فلسفة التأديب الإيجابي ومع روح قانون حقوق الطفل «وديمة» (اتحادي رقم ٣ لسنة ٢٠١٦).</td><td>أُعيدت صياغة الفقرة على التربية بالقدوة والتكليف والمجالسة.</td></tr>
+      <tr><td>«التواصل مع الأجانب ومخالفي الدين»</td><td>العنوان يصلح لكتاب عام، ويحتاج في المنهج لغة التعايش.</td><td>«التعايش مع المقيمين وأتباع الأديان»، مع ربطه بمرسوم بقانون اتحادي رقم ٣٤ لسنة ٢٠٢٣ في شأن مكافحة التمييز والكراهية والتطرف.</td></tr>
+      <tr><td>بيت منسوب إلى حمد بوشهاب</td><td>البيت مختل الوزن والرسم في المسودة، والشاعر توفي سنة ٢٠٠٢ فنصّه محمي بحقوق المؤلف.</td><td>حُجب ويُعاد بعد مطابقته على الديوان واستئذان أصحاب الحق.</td></tr>
+      <tr><td>الفقرة الخاصة بالأبناء</td><td>سطر مشوّه طباعياً («حيانبملبنرةوةوربصب»)، وتفاصيل رضاعة وتبخيت لا تناسب المرحلة.</td><td>أُعيدت الصياغة واختُصرت التفاصيل الطبية.</td></tr>
+      <tr><td>المسودة كلها</td><td>المخاطَب فيها رجل غالباً، والمنهج لطلاب وطالبات.</td><td>أُضيف سنع المرأة في المجلس والملبس، وصيغ الخطاب بما يشمل الجنسين.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3 id="rv-gaps">إضافات اقتضاها التحويل إلى منهج</h3>
+  <div class="grid2">
+    <div class="box edit"><div class="tag">إضافة منهجية</div><p>وحدة تأسيسية في <b>مفهوم السنع</b> ومصادره ووظيفته في الهوية الوطنية، لأن المسودة تفترض المفهوم ولا تعرّفه.</p></div>
+    <div class="box edit"><div class="tag">إضافة معاصرة</div><p>وحدة <b>السنع الرقمي والمعاصر</b>: وسائل التواصل، والخصوصية والتصوير، وسنع المدرسة، والسفر، والمرافق العامة.</p></div>
+    <div class="box edit"><div class="tag">إضافة قانونية</div><p>إطار «السنع والقانون» في الوحدات ذات الصلة، يقرن العُرف بالتشريع الاتحادي النافذ.</p></div>
+    <div class="box edit"><div class="tag">إضافة تقويمية</div><p>قسم <b>المراجعة والتقييم</b> في نهاية كل وحدة، ومشروع بحثي ختامي، ومعجم، وثبت مصادر موثَّق.</p></div>
+  </div>
+
+  <h3 id="rv-ip">ضوابط النزاهة العلمية والملكية الفكرية</h3>
+  <ul class="list">
+    <li>كل حديث نبوي خُرِّج من مصدره الأصلي؛ ولم يُعتمد أي مصدر شيعي.</li>
+    <li>كل مثل شعبي وُسم بحالته: <span class="chip ok">موثَّق</span> إذا وُجد في مصدر إماراتي معتمد، و<span class="chip warn">يُوثَّق</span> إذا بقي على رواية المؤلف. وجُعل توثيق الأمثال المعلّقة جزءاً من المشروع البحثي للطلاب.</li>
+    <li>أُبقي من الشعر ما مضى على وفاة قائله أكثر من خمسين عاماً (الماجدي بن ظاهر، يعقوب الحاتمي، مبارك العقيلي)، وحُجب شعر المعاصرين حتى الاستئذان.</li>
+    <li>صياغة هذه الطبعة أصيلة، والمراجع المقترحة للاستزادة مذكورة بعناوينها دون نقل من متونها.</li>
+  </ul>
+</section>
+
+<!-- ===================== التقديم ===================== -->
+<section class="part" id="intro">
+  <div class="part-head">
+    <div class="eyebrow">تقديم</div>
+    <h2>الساير ساير على اسنعه</h2>
+  </div>
+  <div class="box edit"><div class="tag">موضع كلمة الجهة المُصدِرة</div><p>يُخصَّص هذا الموضع لكلمة الوزارة أو الجهة التي تعتمد المنهج.</p></div>
+  <div class="prose">
+    <p>مجتمع دولة الإمارات العربية المتحدة مجتمعٌ منضبطٌ بعاداته وتقاليده الراسخة، وهي عادات تنبع من دينه الإسلامي الحنيف، الذي جعل حُسن الخُلق غاية من غايات الرسالة؛ قال رسول الله ﷺ: «إنما بُعثتُ لأُتمّم مكارم الأخلاق». فكانت مكارم الأخلاق صفة لازمة للمجتمعات الإسلامية حيثما كانت، في علاقة أفرادها بالغريب الوافد، وفي علاقتهم فيما بينهم.</p>
+    <p>وقد حافظ مجتمع الإمارات على نسيجه الاجتماعي وأخلاق أفراده، وكانت قيادته قدوةً في هذا الباب: يُكرمون الضيف، ويرحمون الصغير، ويوقّرون الكبير، ويُغيثون الملهوف، ويجبرون كسر المحتاج. مجالسهم مفتوحة، وقلوبهم قبل آذانهم منصتة، يتعلّم الجالس فيها الوقار والحكمة.</p>
+    <p>وكانت المجالس مدارسَ السنع الأولى، ينقل فيها الآباء والأجداد مكارم التعامل جيلاً بعد جيل. ومع اتساع المدن وتسارع الحياة وانتقال كثير من التواصل إلى الشاشات، صار لزاماً أن يُدوَّن هذا الموروث في كتاب يتعلّمه الناشئة في مدارسهم، فيحفظ عليهم هويتهم، ويعينهم على حسن التعامل مع أنفسهم ومع الناس.</p>
+    <p>ويقول المثل الإماراتي: «الساير ساير على اسنعه»، أي إن كل من يتعامل مع الآخرين إنما يتعامل معهم بما فيه من سيرة حسنة، ويتخلّق بما تربّى عليه من خُلُق كريم. فالسنع ليس قواعد تُحفظ، بل سيرة تُعاش.</p>
+  </div>
+  <div class="box asl">
+    <div class="tag">من أصول السنع</div>
+    <p class="quote">«إنما بُعثتُ لأُتمّم مكارم الأخلاق».</p>
+    <p class="src">رواه أحمد في المسند بلفظ «صالح الأخلاق» (ط. الرسالة، ج١٤، ص٥١٣) من حديث أبي هريرة رضي الله عنه، والحاكم في المستدرك بلفظ «مكارم الأخلاق».</p>
+  </div>
+  <p class="small muted">حالة المثل: <span class="chip warn">يُوثَّق</span> لم يُعثر عليه في مصدر منشور؛ وهو على رواية المؤلف.</p>
+</section>
+
+<!-- ===================== دليل المعلم ===================== -->
+<section class="part" id="guide">
+  <div class="part-head">
+    <div class="eyebrow">دليل المعلم</div>
+    <h2>فلسفة المنهج وبنيته</h2>
+    <p class="lead">كيف يُدرَّس هذا الكتاب على مدى سبع سنوات دراسية، دون تكرار ممل ودون قفز يتجاوز نضج المتعلم.</p>
+  </div>
+
+  <h3 id="g-phil">المنطلقات</h3>
+  <div class="grid2">
+    <div class="box asl"><div class="tag">السنع قيمة قبل أن يكون سلوكاً</div><p>كل أدب يُدرَّس مقروناً بعلّته: لماذا نبدأ باليمين؟ لماذا نُكرم الضيف قبل سؤاله عن حاجته؟ فالمتعلم الذي يفهم العلّة يحسن التصرف في موقف لم يرد في الكتاب.</p></div>
+    <div class="box asl"><div class="tag">التعلّم الحلزوني</div><p>تعود كل وحدة في كل مستوى بعمق أكبر: الطالب في السادس يتعلّم كيف يصبّ القهوة، وفي الثاني عشر يحلّل القهوة رمزاً للكرم أدرجته اليونسكو في قوائم التراث غير المادي.</p></div>
+    <div class="box asl"><div class="tag">من المجلس إلى الصف</div><p>المجلس مدرسة بالمحاكاة. لذلك تقوم الحصة على التمثيل والممارسة واستضافة كبار السن، لا على التلقين وحده.</p></div>
+    <div class="box asl"><div class="tag">العُرف والشرع والقانون</div><p>يتعلّم الطالب أن السنع منظومة متكاملة: أصل ديني، وعُرف محلي، وتشريع اتحادي يحمي القيم ذاتها.</p></div>
+  </div>
+
+  <h3 id="g-levels">المستويات الثلاثة</h3>
+  <div class="levels">
+    <div class="lvl"><h5>المستوى الأول · الصفان ٦–٧</h5><p class="small muted">من الحلقة الثانية</p><ul><li>معرفة الأدب وممارسته</li><li>العبارات والردود المأثورة</li><li>محاكاة المواقف</li></ul></div>
+    <div class="lvl"><h5>المستوى الثاني · الصفان ٨–٩</h5><p class="small muted">نهاية الثانية وبداية الثالثة</p><ul><li>تفسير العلّة والقيمة</li><li>الموازنة بين الماضي والحاضر</li><li>السنع الرقمي والمدرسي</li></ul></div>
+    <div class="lvl"><h5>المستوى الثالث · الصفوف ١٠–١٢</h5><p class="small muted">الحلقة الثالثة</p><ul><li>التحليل الاجتماعي والقانوني</li><li>الهوية في عالم متعدد الثقافات</li><li>البحث الميداني والتوثيق</li></ul></div>
+  </div>
+  <p class="small muted">التقسيم إلى حلقات وفق البوابة الرسمية لحكومة الإمارات: الحلقة الثانية للصفوف ٥–٨، والحلقة الثالثة للصفوف ٩–١٢.</p>
+
+  <h3 id="g-matrix">مصفوفة النطاق والتتابع</h3>
+  <p style="max-width:72ch"><span class="mk f"></span> تقديم أساسي للوحدة · <span class="mk h"></span> تعميق وتوسيع · <span class="mk r"></span> مراجعة وتطبيق. يُقترح تدريس الكتاب بحصة أسبوعية (نحو ٣٠ حصة في العام)، أو دمجه في مادة «الدراسات الاجتماعية والتربية الأخلاقية».</p>
+  <div class="tbl"><table>
+    <thead><tr><th>الوحدة</th><th>٦</th><th>٧</th><th>٨</th><th>٩</th><th>١٠</th><th>١١</th><th>١٢</th></tr></thead>
+    <tbody>
+      <tr><td>١. السنع: المفهوم والجذور</td><td class="c"><span class="mk f" title="تقديم أساسي"></span></td><td class="c"><span class="mk r" title="مراجعة وتطبيق"></span></td><td class="c"><span class="mk r" title="مراجعة وتطبيق"></span></td><td class="c"><span class="mk h" title="تعميق وتوسيع"></span></td><td class="c"><span class="mk r" title="مراجعة وتطبيق"></span></td><td class="c"><span class="mk r" title="مراجعة وتطبيق"></span></td><td class="c"><span class="mk h" title="تعميق وتوسيع"></span></td></tr>
+      <tr><td>٢. سنع المجلس</td><td class="c"><span class="mk f" title="تقديم أساسي"></span></td><td class="c"><span class="mk h" title="تعميق وتوسيع"></span></td><td class="c"><span class="mk r" title="مراجعة وتطبيق"></span></td><td class="c"><span class="mk h" title="تعميق وتوسيع"></span></td><td class="c"><span class="mk r" title="مراجعة وتطبيق"></span></td><td class="c"><span class="mk h" title="تعميق وتوسيع"></span></td><td class="c"><span class="mk r" title="مراجعة وتطبيق"></span></td></tr>
+      <tr><td>٣. سنع الضيافة</td><td class="c"><span class="mk f" title="تقديم أساسي"></span></td><td class="c"><span class="mk h" title="تعميق وتوسيع"></span></td><td class="c"><span class="mk h" title="تعميق وتوسيع"></span></td><td class="c"><span class="mk r" title="مراجعة وتطبيق"></span></td><td class="c"><span class="mk r" title="مراجعة وتطبيق"></span></td><td class="c"><span class="mk r" title="مراجعة وتطبيق"></span></td><td class="c"><span class="mk h" title="تعميق وتوسيع"></span></td></tr>
+      <tr><td>٤. الطريق والتواصل والزيارات</td><td class="c"><span class="mk h" title="تعميق وتوسيع"></span></td><td class="c"><span class="mk f" title="تقديم أساسي"></span></td><td class="c"><span class="mk h" title="تعميق وتوسيع"></span></td><td class="c"><span class="mk r" title="مراجعة وتطبيق"></span></td><td class="c"><span class="mk h" title="تعميق وتوسيع"></span></td><td class="c"><span class="mk r" title="مراجعة وتطبيق"></span></td><td class="c"><span class="mk r" title="مراجعة وتطبيق"></span></td></tr>
+      <tr><td>٥. سنع الأسرة والعلاقات</td><td class="c"><span class="mk r" title="مراجعة وتطبيق"></span></td><td class="c"><span class="mk f" title="تقديم أساسي"></span></td><td class="c"><span class="mk h" title="تعميق وتوسيع"></span></td><td class="c"><span class="mk f" title="تقديم أساسي"></span></td><td class="c"><span class="mk h" title="تعميق وتوسيع"></span></td><td class="c"><span class="mk h" title="تعميق وتوسيع"></span></td><td class="c"><span class="mk h" title="تعميق وتوسيع"></span></td></tr>
+      <tr><td>٦. المناسبات والملبس</td><td class="c"><span class="mk f" title="تقديم أساسي"></span></td><td class="c"><span class="mk r" title="مراجعة وتطبيق"></span></td><td class="c"><span class="mk f" title="تقديم أساسي"></span></td><td class="c"><span class="mk r" title="مراجعة وتطبيق"></span></td><td class="c"><span class="mk h" title="تعميق وتوسيع"></span></td><td class="c"><span class="mk r" title="مراجعة وتطبيق"></span></td><td class="c"><span class="mk r" title="مراجعة وتطبيق"></span></td></tr>
+      <tr><td>٧. مكارم الأخلاق العامة</td><td class="c"><span class="mk r" title="مراجعة وتطبيق"></span></td><td class="c"><span class="mk h" title="تعميق وتوسيع"></span></td><td class="c"><span class="mk f" title="تقديم أساسي"></span></td><td class="c"><span class="mk h" title="تعميق وتوسيع"></span></td><td class="c"><span class="mk f" title="تقديم أساسي"></span></td><td class="c"><span class="mk h" title="تعميق وتوسيع"></span></td><td class="c"><span class="mk h" title="تعميق وتوسيع"></span></td></tr>
+      <tr><td>٨. السنع الرقمي والمعاصر</td><td class="c"><span class="mk r" title="مراجعة وتطبيق"></span></td><td class="c"><span class="mk h" title="تعميق وتوسيع"></span></td><td class="c"><span class="mk f" title="تقديم أساسي"></span></td><td class="c"><span class="mk f" title="تقديم أساسي"></span></td><td class="c"><span class="mk h" title="تعميق وتوسيع"></span></td><td class="c"><span class="mk f" title="تقديم أساسي"></span></td><td class="c"><span class="mk f" title="تقديم أساسي"></span></td></tr>
+      <tr><td>المشروع البحثي الختامي</td><td class="c">مصغّر</td><td class="c">مصغّر</td><td class="c">متوسط</td><td class="c">متوسط</td><td class="c">كامل</td><td class="c">كامل</td><td class="c">تخرّج</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3 id="g-unit">بنية الوحدة الواحدة</h3>
+  <figure class="fig">
+    <svg viewBox="0 0 760 120" width="100%" role="img" aria-label="مراحل الوحدة: نواتج التعلم، المتن، من أصول السنع، من الموروث، السنع والقانون، النشاط، المراجعة والتقييم">
+      <g style="font-size:15px">
+        <rect x="652" y="30" width="104" height="56" rx="6" style="fill:var(--navy)"/><text x="704" y="64" text-anchor="middle" style="fill:var(--sheet);font-weight:700">نواتج التعلّم</text>
+        <rect x="544" y="30" width="96" height="56" rx="6" style="fill:var(--tint-navy);stroke:var(--navy)"/><text x="592" y="64" text-anchor="middle" style="fill:var(--ink)">المتن</text>
+        <rect x="436" y="30" width="96" height="56" rx="6" style="fill:var(--tint-navy);stroke:var(--navy)"/><text x="484" y="64" text-anchor="middle" style="fill:var(--ink)">أصول السنع</text>
+        <rect x="328" y="30" width="96" height="56" rx="6" style="fill:var(--tint-gold);stroke:var(--gold)"/><text x="376" y="64" text-anchor="middle" style="fill:var(--ink)">من الموروث</text>
+        <rect x="220" y="30" width="96" height="56" rx="6" style="fill:var(--tint-law);stroke:var(--navy)"/><text x="268" y="64" text-anchor="middle" style="fill:var(--ink)">السنع والقانون</text>
+        <rect x="112" y="30" width="96" height="56" rx="6" style="fill:var(--sheet);stroke:var(--gold);stroke-dasharray:4 3"/><text x="160" y="64" text-anchor="middle" style="fill:var(--ink)">نشاط</text>
+        <rect x="4" y="30" width="96" height="56" rx="6" style="fill:var(--gold)"/><text x="52" y="56" text-anchor="middle" style="fill:var(--sheet);font-weight:700">المراجعة</text><text x="52" y="76" text-anchor="middle" style="fill:var(--sheet);font-weight:700">والتقييم</text>
+      </g>
+    </svg>
+    <figcaption>تسير كل وحدة من اليمين إلى اليسار؛ وقسم «السنع والقانون» يظهر حيث تقتضيه مادة الوحدة.</figcaption>
+  </figure>
+
+  <h3 id="g-assess">منهجية التقييم</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>الأداة</th><th>ما تقيسه</th><th>الوزن المقترح</th></tr></thead>
+    <tbody>
+      <tr><td>أسئلة الاختيار والصواب والخطأ</td><td>المعرفة بالآداب والمصطلحات</td><td class="c">٢٠٪</td></tr>
+      <tr><td>الأسئلة المقالية القصيرة</td><td>فهم العلّة والقيمة</td><td class="c">٢٠٪</td></tr>
+      <tr><td>المواقف السلوكية</td><td>حسن التصرف في موقف جديد</td><td class="c">٢٠٪</td></tr>
+      <tr><td>مهمة الأداء (تمثيل، ضيافة، مقابلة)</td><td>الممارسة الفعلية</td><td class="c">٢٥٪</td></tr>
+      <tr><td>ملف الإنجاز والتقويم الذاتي</td><td>التأمل والتحسّن المستمر</td><td class="c">١٥٪</td></tr>
+    </tbody>
+  </table></div>
+  <div class="box edit"><div class="tag">تنبيه للمعلم</div><p>السنع يُقاس بالسلوك قبل الورقة. لا يُحرج الطالب أمام زملائه إن أخطأ في أدب ما؛ فالتصويب الهادئ نفسه من السنع.</p></div>
+</section>
+
+<!-- ===================== الوحدة الأولى ===================== -->
+<section class="part" id="u1">
+  <div class="part-head">
+    <div class="unit-band"><span class="unit-num">١</span><div><div class="eyebrow">الوحدة الأولى · وحدة تأسيسية مضافة</div><h2>السنع: المفهوم والجذور والهوية</h2></div></div>
+    <p class="lead">ما السنع؟ ومن أين جاء؟ ولماذا نتعلّمه في المدرسة بعد أن كان يُتعلَّم في المجلس؟</p>
+  </div>
+
+  <h3 id="u1-out">نواتج التعلّم</h3>
+  <div class="levels">
+    <div class="lvl"><h5>المستوى الأول (٦–٧)</h5><ul><li>يعرّف السنع بلغة بسيطة.</li><li>يذكر ثلاثة أمثلة لسلوك سنيع من حياته.</li><li>يعدّد مصادر السنع الثلاثة.</li></ul></div>
+    <div class="lvl"><h5>المستوى الثاني (٨–٩)</h5><ul><li>يربط السنع بأصله اللغوي.</li><li>يفسّر دور المجلس في نقل السنع.</li><li>يميّز بين السنع والمجاملة الشكلية.</li></ul></div>
+    <div class="lvl"><h5>المستوى الثالث (١٠–١٢)</h5><ul><li>يحلّل السنع بوصفه رأس مال اجتماعياً.</li><li>يناقش تحديات انتقال السنع بين الأجيال.</li><li>يربطه بالهوية الوطنية وبرامج الدولة.</li></ul></div>
+  </div>
+
+  <h3 id="u1-l1">الدرس الأول: ما السنع؟</h3>
+  <div class="prose">
+    <p>السنع في لهجة أهل الإمارات هو حُسن السلوك وحُسن التصرف في التعامل مع الناس: كيف تدخل المجلس، وكيف تُسلّم، وكيف تُكرم ضيفك، وكيف تخاطب الكبير، وكيف تواسي المصاب. فإذا قيل «فلان سنيع» فالمراد أنه مهذّب يعرف الأصول، وإذا قيل «ما فيه سنع» فالمراد أنه يجهل آداب التعامل أو يتجاوزها.</p>
+    <p>وللكلمة جذر فصيح؛ فالسنيع في معاجم العربية هو الحَسَن الجميل. فالسنع في أصله جمالٌ، لكنه جمال الفعل والمعاملة لا جمال الصورة وحدها.</p>
+  </div>
+  <div class="box asl">
+    <div class="tag">من اللغة</div>
+    <p>«السَّنِيع: الحَسَن». نقله أبو عبيد عن أبي عمرو الشيباني، وأورده الأزهري في «تهذيب اللغة» في مادة (سنع). وفي «الجيم» لأبي عمرو: «السنيعة: الناقة الحسنة».</p>
+    <p class="src">أبو عمرو الشيباني (ت ٢٠٦هـ)، الجيم ٢/١٠٥؛ أبو عبيد القاسم بن سلّام (ت ٢٢٤هـ)، الغريب المصنَّف ١/٥٢؛ الأزهري (ت ٣٧٠هـ)، تهذيب اللغة، مادة «سنع».</p>
+  </div>
+
+  <h3 id="u1-l2">الدرس الثاني: مصادر السنع</h3>
+  <figure class="fig">
+    <svg viewBox="0 0 620 236" width="100%" role="img" aria-label="ثلاثة مصادر يتغذى منها السنع: الدين، والعرف، والبيئة">
+      <g style="font-size:16px">
+        <circle cx="310" cy="118" r="62" style="fill:var(--navy)"/>
+        <text x="310" y="124" text-anchor="middle" style="fill:var(--sheet);font-weight:700;font-size:22px">السنع</text>
+        <circle cx="520" cy="70" r="52" style="fill:var(--tint-navy);stroke:var(--navy)"/>
+        <text x="520" y="66" text-anchor="middle" style="fill:var(--ink);font-weight:700">الدين</text>
+        <text x="520" y="88" text-anchor="middle" style="fill:var(--muted);font-size:13px">القرآن والسنة</text>
+        <circle cx="100" cy="70" r="52" style="fill:var(--tint-gold);stroke:var(--gold)"/>
+        <text x="100" y="66" text-anchor="middle" style="fill:var(--ink);font-weight:700">العُرف</text>
+        <text x="100" y="88" text-anchor="middle" style="fill:var(--muted);font-size:13px">عادات الآباء</text>
+        <circle cx="310" cy="204" r="0"/>
+        <rect x="195" y="188" width="230" height="38" rx="19" style="fill:var(--tint-law);stroke:var(--navy)"/>
+        <text x="310" y="212" text-anchor="middle" style="fill:var(--ink);font-weight:700">البيئة: بحر وصحراء وجبل</text>
+        <line x1="470" y1="84" x2="368" y2="106" style="stroke:var(--navy);stroke-width:2"/>
+        <line x1="150" y1="84" x2="252" y2="106" style="stroke:var(--gold);stroke-width:2"/>
+        <line x1="310" y1="180" x2="310" y2="190" style="stroke:var(--navy);stroke-width:2"/>
+      </g>
+    </svg>
+    <figcaption>شكل ١: يتغذّى السنع من ثلاثة منابع؛ والقانون يحمي كثيراً من قيمه.</figcaption>
+  </figure>
+  <div class="prose">
+    <p><b>الدين:</b> أصل كثير من آداب السنع، كالبدء باليمين، وإفشاء السلام، وإكرام الضيف، وبرّ الوالدين، وحفظ حق الجار.</p>
+    <p><b>العُرف:</b> ما تعارف عليه أهل البلاد وتوارثوه، كترتيب تقديم القهوة، وهزّ الفنجان علامةً على الاكتفاء، وتقديم العود في ختام المجلس.</p>
+    <p><b>البيئة:</b> فقد صنعت حياة البحر والغوص والصحراء والجبل أخلاق الصبر والتعاون والفزعة، وعلّمت الناس ألّا يُسرفوا في نعمة شحيحة.</p>
+  </div>
+
+  <h3 id="u1-l3">الدرس الثالث: المجلس مدرسة السنع</h3>
+  <div class="prose">
+    <p>لم يكن للسنع كتاب يُقرأ؛ كان الصبي يرافق أباه إلى المجلس فيرى كيف يُستقبَل الضيف، وكيف يُصبّ الفنجان، وكيف يُسكت الكبير مجلساً بكلمة. وكانت الفتاة تتعلّم مثل ذلك في مجالس النساء وفي بيت جدتها. فالتعلّم كان بالمشاهدة، ثم بالمشاركة، ثم بالتكليف.</p>
+    <p>وقد سجّلت منظمة اليونسكو «المجالس: فضاءً ثقافياً واجتماعياً» و«القهوة العربية: رمزاً للكرم» في القائمة التمثيلية للتراث الثقافي غير المادي للبشرية عام ٢٠١٥، في ملفين مشتركين قدّمتهما الإمارات مع المملكة العربية السعودية وسلطنة عُمان ودولة قطر. وهذا اعتراف عالمي بأن ما يجري في مجالسنا تراثٌ إنساني يستحق الصون.</p>
+  </div>
+
+  <h3 id="u1-l4">الدرس الرابع: السنع والهوية الوطنية</h3>
+  <div class="prose">
+    <p>أطلقت وزارة التربية والتعليم برنامج «السنع الإماراتي» في مارس ٢٠٢٢ ليشمل الحلقات الدراسية الثلاث في المدارس الحكومية والخاصة، بالتعاون مع مؤسسات تراثية منها مركز حمدان بن محمد لإحياء التراث. وأُعلن عام ٢٠٢٥ «عام المجتمع» تحت شعار «يداً بيد»، ثم عام ٢٠٢٦ «عام الأسرة». وكلها مبادرات تؤكد أن السنع ليس ماضياً يُحكى، بل أساسٌ لمجتمع متماسك اليوم.</p>
+  </div>
+  <div class="box act">
+    <div class="tag">نشاط صفي · جميع المستويات</div>
+    <p><b>شجرة السنع في بيتي:</b> يسأل الطالب أحد كبار أسرته عن ثلاثة آداب تعلّمها في صغره ولم تعد شائعة اليوم، ويدوّنها مع اسم الراوي وصلته به. المستوى الثالث يضيف: لماذا تراجع هذا الأدب في رأي الراوي؟</p>
+  </div>
+
+  <div class="assess" id="u1-assess">
+    <h3>المراجعة والتقييم</h3>
+    <h4>أولاً: اختر الإجابة الصحيحة</h4>
+    <ol>
+      <li>السنيع في معاجم اللغة العربية معناه:<div class="opts"><span>أ) الكثير</span><span>ب) الحسن</span><span>ج) الصامت</span><span>د) القديم</span></div></li>
+      <li>من المصادر الثلاثة للسنع:<div class="opts"><span>أ) الموضة</span><span>ب) العُرف</span><span>ج) الإعلان</span><span>د) الألعاب</span></div></li>
+      <li>سجّلت اليونسكو المجالس في قائمة التراث غير المادي عام:<div class="opts"><span>أ) ٢٠٠٥</span><span>ب) ٢٠١٠</span><span>ج) ٢٠١٥</span><span>د) ٢٠٢٢</span></div></li>
+      <li>أطلقت وزارة التربية والتعليم برنامج «السنع الإماراتي» عام:<div class="opts"><span>أ) ٢٠١٦</span><span>ب) ٢٠٢٢</span><span>ج) ٢٠٢٥</span><span>د) ٢٠٢٦</span></div></li>
+    </ol>
+    <h4>ثانياً: ضع علامة (✓) أو (✗) وصحّح الخطأ</h4>
+    <ol>
+      <li>السنع قواعد شكلية لا علاقة لها بالأخلاق. ( )</li>
+      <li>كان السنع يُتعلَّم قديماً بالمشاهدة والمشاركة في المجالس. ( )</li>
+      <li>البيئة البحرية والصحراوية أثّرت في أخلاق أهل الإمارات. ( )</li>
+    </ol>
+    <h4>ثالثاً: أجب بإيجاز</h4>
+    <ol>
+      <li><span class="chip lv">م١</span> عرّف السنع بأسلوبك، ومثّل بسلوكين.</li>
+      <li><span class="chip lv">م٢</span> ما الفرق بين السنع والمجاملة الشكلية؟</li>
+      <li><span class="chip lv">م٣</span> «السنع رأس مال اجتماعي». ناقش العبارة في فقرة، مستشهداً بمثال من الحي أو المدرسة.</li>
+    </ol>
+    <h4>رابعاً: موقف وتصرّف</h4>
+    <p>زميلك الجديد قدم من بلد آخر، وسألك: «ماذا تعني كلمة سنع التي يكررها معلمكم؟» كيف تشرحها له في ثلاث جمل مع مثال؟</p>
+    <h4>خامساً: تقويم ذاتي</h4>
+    <ul class="checklist"><li>أستطيع تعريف السنع ومصادره.</li><li>أعرف لماذا كان المجلس مدرسة.</li><li>جمعت أدباً واحداً على الأقل من كبار أسرتي.</li></ul>
+    <details class="key"><summary>مفتاح الإجابة للمعلم</summary><div>
+      <p>أولاً: ١-ب، ٢-ب، ٣-ج، ٤-ب.</p>
+      <p>ثانياً: ١ (✗): السنع أخلاق تتجسّد في سلوك؛ ٢ (✓)؛ ٣ (✓).</p>
+      <p>ثالثاً-٢: المجاملة الشكلية قد تكون بلا صدق، أما السنع فيقوم على احترام حقيقي للآخر ويظهر في الفعل لا في القول وحده.</p>
+    </div></details>
+  </div>
+</section>
+
+<!-- ===================== الوحدة الثانية ===================== -->
+<section class="part" id="u2">
+  <div class="part-head">
+    <div class="unit-band"><span class="unit-num">٢</span><div><div class="eyebrow">الوحدة الثانية · من الفصل الأول في المسودة</div><h2>سنع المجلس</h2></div></div>
+    <p class="lead">أنواع المجالس، وآداب الدخول والجلوس، وآداب الحديث وحفظ اللسان.</p>
+  </div>
+
+  <h3 id="u2-out">نواتج التعلّم</h3>
+  <div class="levels">
+    <div class="lvl"><h5>المستوى الأول (٦–٧)</h5><ul><li>يعدّد أنواع المجالس.</li><li>يطبّق آداب الدخول والسلام والجلوس.</li><li>يستعمل الكنية وعبارات المجاملة.</li></ul></div>
+    <div class="lvl"><h5>المستوى الثاني (٨–٩)</h5><ul><li>يفسّر علّة آداب الحديث.</li><li>يتعامل بسنع مع الخلاف داخل المجلس.</li><li>يميّز النميمة والغيبة ويتجنّبهما.</li></ul></div>
+    <div class="lvl"><h5>المستوى الثالث (١٠–١٢)</h5><ul><li>يحلّل وظائف المجلس الاجتماعية والسياسية.</li><li>يدير جلسة حوار وفق سنع المجلس.</li><li>يناقش مكانة العربية في المجلس.</li></ul></div>
+  </div>
+
+  <h3 id="u2-l1">الدرس الأول: المجلس وأنواعه</h3>
+  <div class="prose">
+    <p>المجلس، أو «الميلس» في لهجة أهل الإمارات، مكان اجتماع الناس وتداول شؤونهم: يتعارفون فيه على أخبار بعضهم من سفر وحضور وتجارة وصلح ومرض وسمر. ولكل مجلس أعرافه التي لا يُسمح بتجاوزها، وخرقها يُعدّ من قلة السنع. ومن أسمائه «المرامس» من «الرمسة» أي الحديث، و«البرزة» وهي في المناطق الساحلية مجلس واسع كثير النوافذ يكون غالباً للشيوخ والوجهاء.</p>
+  </div>
+  <div class="tbl"><table>
+    <thead><tr><th>نوع المجلس</th><th>وصفه</th></tr></thead>
+    <tbody>
+      <tr><td>مجالس الأعيان وأهل الرأي</td><td>تُناقَش فيها شؤون الناس العامة وتُحلّ الخلافات.</td></tr>
+      <tr><td>المجالس الدائمة</td><td>قريبة من البيوت والمساجد، يلتقي فيها أهل الحي يومياً.</td></tr>
+      <tr><td>المجالس الموسمية</td><td>ترتبط بالمناسبات، كخيام الأعراس والعزاء والمناسبات الدينية.</td></tr>
+      <tr><td>مجلس البيت</td><td>ملحق بالمنزل، يُستقبل فيه الزائر والضيف.</td></tr>
+      <tr><td>مجالس النساء <span class="chip lv">مضاف</span></td><td>تجمع الأمهات والجدات والبنات، وتُنقل فيها آداب الضيافة والتربية والحِرف.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="prose">
+    <p>ومهما اختلف شكل المجلس فقواعد الضيافة فيه واحدة في إكرام الوافد الغريب «الخطّار» والجار والقريب: فالضيف الوافد يُبادَر بالعود والقهوة، ثم يُقدَّم له الغداء أو العشاء، ثم الفوالة، ثم القهوة، ثم العود. والزائر القريب أو الجار يُبادَر بالعود والقهوة، ثم الفوالة، ثم القهوة، ثم العود. و«الفوالة» ما يُقدَّم للضيف من طعام خفيف كاللقيمات والبثيثة والعصيد والفاكهة.</p>
+  </div>
+
+  <h3 id="u2-l2">الدرس الثاني: آداب الدخول والجلوس</h3>
+  <ul class="list">
+    <li>يستقبل صاحب الدعوة ضيوفه عند الباب، ويُجلسهم في صدر المجلس.</li>
+    <li>يبدأ السلام من اليمين إلى اليسار، بالمصافحة، أو بتلاقي طرف الأنف «الخشم» بين الرجال الأقارب والمعارف، أو بتقبيل رأس الوالدين ومن في مقامهما.</li>
+    <li>يقوم صاحب المجلس للقادم ويرحّب به، ويُنزل الناس منازلهم، ويقدّم الكبير وصاحب المقام في المشي والجلوس.</li>
+    <li>لا يجلس القادم وسط المجلس، ولا يجلس على مقعد أعلى من مجلس القوم إلا لعذر يعتذر به، كألم في ركبته.</li>
+    <li>لا يمرّ أمام الجالسين إلا معتذراً، ولا يمرّ بين اثنين واقفين يتحدثان، بل يتجاوزهما من خلف أحدهما.</li>
+    <li>لا يعطي ظهره لأحد، ولا يمدّ رجله في وجه أحد إلا لعذر يستأذن فيه.</li>
+    <li>يجلس معتدلاً مستنداً إلى ظهره أو متكئاً على مسنده، ولا يستلقي.</li>
+    <li>لا يحضر المجلس بملابس النوم أو الملابس الداخلية، ولا يرفع صوته، ولا يصفّر، ولا يُخرج ما يُستقبح من الأصوات.</li>
+    <li>إذا كان بينه وبين أحد الحضور خلاف جعل «الحشيمة» لصاحب المجلس، أي احتراماً له، فأمسك عن إثارة الخلاف حتى يخرجا. <span class="chip warn">المصطلح يُوثَّق</span></li>
+  </ul>
+  <div class="box asl">
+    <div class="tag">من أصول السنع</div>
+    <p class="verse">﴿يَا أَيُّهَا الَّذِينَ آمَنُوا إِذَا قِيلَ لَكُمْ تَفَسَّحُوا فِي الْمَجَالِسِ فَافْسَحُوا يَفْسَحِ اللَّهُ لَكُمْ﴾</p>
+    <p class="src">سورة المجادلة، من الآية ١١.</p>
+  </div>
+
+  <h3 id="u2-l3">الدرس الثالث: آداب الحديث</h3>
+  <h4>التقديم للكبير وأدب الاعتراض</h4>
+  <div class="prose">
+    <p>لا يسبق الصغيرُ الكبيرَ إلى الكلام، ولا يقاطعه. وإن علم أن المتحدث أخطأ صبر حتى يُسأل عن رأيه. فإن كان في مثل سنّه أو أكبر وأراد أن يخالفه قال: «وانت الصادق»، ثم ذكر رأيه بلطف، غير ساخر ولا شامت. وإذا طُلب منه أن يناول شيئاً ناوله بيمينه وأخذ بيمينه، فإن أخذ باليسار ناسياً اعتذر بقوله: «اليسار ما تشناك»، أي لا أقصد بها إساءة.</p>
+  </div>
+  <h4>الحديث بلغتنا ولغة أجدادنا</h4>
+  <div class="prose">
+    <p>لا يخلط أهل الإمارات حديثهم في المجالس بألفاظ أجنبية دون حاجة، ويرون التلفّظ بعبارات غير مفهومة للحاضرين من سوء المجالسة. فالعربية الفصحى واللهجة الإماراتية أمانة تُرعى في الحديث والمثل والشعر.</p>
+  </div>
+  <div class="box edit"><div class="tag">ملاحظة تحريرية</div><p>كان هنا بيت منسوب إلى الشاعر حمد بن خليفة بوشهاب (١٩٣٦–٢٠٠٢) في الثناء على نعمة البيان. حُجب حتى يُطابَق على ديوانه ويُستأذن أصحاب الحق في نشره.</p></div>
+  <h4>الترفّع عن النميمة والغيبة</h4>
+  <div class="prose">
+    <p>المجالس مدارس للناشئة يتعلّمون فيها مكارم الأخلاق ومعاني الرجولة والآداب والأشعار، لذلك يُذمّ فيها الخوض في أعراض الناس. ولا يكتفي أهل السنع بذمّ ناقل الكلام، بل يذمّون من يُصغي إليه في أصحابه.</p>
+  </div>
+  <div class="box mawruth">
+    <div class="tag">من الموروث</div>
+    <p class="quote">«عدوّك موب من قال فيك، عدوّك من بلّغك». <span class="chip ok">موثَّق</span></p>
+    <p class="src">أي إن الذي ينقل إليك الكلام السيئ أشد ضرراً من قائله.</p>
+    <p class="verse">فلا زِمِيت لي يوم صديج … وأشني عدو ما شناني</p>
+    <p class="src">الماجدي بن ظاهر (١٧٨١–١٨٧١م تقريباً): يترفّع عن ذكر صديقه بما يكره، بل عن ذكر عدوه بالسوء وإن ذكره عدوه بسوء.</p>
+  </div>
+  <div class="box asl">
+    <div class="tag">من أصول السنع</div>
+    <p class="verse">﴿وَلَا يَغْتَبْ بَعْضُكُمْ بَعْضًا﴾</p>
+    <p class="src">سورة الحجرات، من الآية ١٢.</p>
+  </div>
+  <h4>المناداة بالاسم والكنية</h4>
+  <div class="prose">
+    <p>يُسرّ المنادى أن تناديه باسمه أو بكنيته التي يحب، ولا يُنادى بما يكره. والكنية من الكلم الطيب الذي عُرف به أهل الإمارات، فيكنّون الكبير والصغير والنساء، ويضمّنون النداء دعاءً لطيفاً، كقولهم: «يا بو محمد، يطوّل لي بعمرك».</p>
+  </div>
+  <div class="box asl">
+    <div class="tag">من أصول السنع</div>
+    <p>كان النبي ﷺ يكنّي حتى الصغار ويلاطفهم، فقال لغلام صغير كان له طائر صغير: «يا أبا عُمير، ما فعل النُّغَير؟».</p>
+    <p class="src">متفق عليه: صحيح البخاري (٦١٢٩، ٦٢٠٣)، وصحيح مسلم (٢١٥٠)، من حديث أنس بن مالك رضي الله عنه.</p>
+    <p class="verse">﴿وَلَا تَنَابَزُوا بِالْأَلْقَابِ﴾</p>
+    <p class="src">سورة الحجرات، من الآية ١١.</p>
+  </div>
+  <h4>حفظ السرّ</h4>
+  <div class="prose">
+    <p>لا يقبل أهل السنع إفشاء الحديث وإعلانه، خاصة إذا استكتمه صاحبه، لأن ذلك ينقص من قدر حامل الحديث ويقدح في أمانته. وفي زمن الهاتف صار لهذا الأدب امتداد جديد: فلا تُنشر محادثة خاصة، ولا تُصوَّر رسالة ويُرسل تصويرها إلى غير صاحبها (انظر الوحدة الثامنة).</p>
+  </div>
+
+  <div class="box act">
+    <div class="tag">نشاط أداء · المستوى الثالث</div>
+    <p><b>مجلس الصف:</b> يدير طالبان جلسة حوار في قضية مدرسية، ويؤدي الزملاء دور الحضور. يرصد المعلم: الاستقبال، وترتيب الكلام، وأدب الاعتراض، وختام المجلس.</p>
+  </div>
+
+  <div class="assess" id="u2-assess">
+    <h3>المراجعة والتقييم</h3>
+    <h4>أولاً: اختر الإجابة الصحيحة</h4>
+    <ol>
+      <li>«البرزة» هي:<div class="opts"><span>أ) خيمة العزاء</span><span>ب) مجلس واسع للوجهاء</span><span>ج) إناء القهوة</span><span>د) طعام خفيف</span></div></li>
+      <li>يبدأ السلام في المجلس:<div class="opts"><span>أ) من اليسار</span><span>ب) بأقرب الناس إلى الباب</span><span>ج) من اليمين</span><span>د) بالأصغر</span></div></li>
+      <li>إذا أخذ أحدهم شيئاً بيساره ناسياً قال:<div class="opts"><span>أ) هني وعافية</span><span>ب) اليسار ما تشناك</span><span>ج) ابشر بالعوض</span><span>د) تستاهل السلامة</span></div></li>
+      <li>«الفوالة» هي:<div class="opts"><span>أ) آخر القهوة</span><span>ب) طعام خفيف يُقدَّم للضيف</span><span>ج) البخور</span><span>د) مكان الجلوس</span></div></li>
+    </ol>
+    <h4>ثانياً: ضع علامة (✓) أو (✗) وصحّح الخطأ</h4>
+    <ol>
+      <li>يجوز المرور بين اثنين واقفين يتحدثان. ( )</li>
+      <li>من السنع أن يُنزَل الناس منازلهم. ( )</li>
+      <li>ناقل الكلام السيئ بريء، والذنب على قائله وحده. ( )</li>
+    </ol>
+    <h4>ثالثاً: أجب بإيجاز</h4>
+    <ol>
+      <li><span class="chip lv">م١</span> رتّب ما يُقدَّم للضيف الوافد من لحظة وصوله إلى انصرافه.</li>
+      <li><span class="chip lv">م٢</span> لماذا يقول المخالف «وانت الصادق» قبل أن يعرض رأيه؟ وما القيمة التي يحفظها ذلك؟</li>
+      <li><span class="chip lv">م٣</span> وازن بين وظائف المجلس قديماً ووظائف مجالس اليوم ووسائل التواصل، مبيّناً ما بقي وما تغيّر.</li>
+    </ol>
+    <h4>رابعاً: موقف وتصرّف</h4>
+    <ol>
+      <li>في مجلس جدك أخذ أحد الحضور يتحدث بسوء عن جار غائب. ماذا تفعل؟ ولماذا؟</li>
+      <li>دخلت مجلساً مزدحماً ولم تجد مكاناً إلا في الوسط. كيف تتصرف بسنع؟</li>
+    </ol>
+    <h4>خامساً: سلّم تقدير مهمة «مجلس الصف»</h4>
+    <div class="tbl"><table>
+      <thead><tr><th>المعيار</th><th>متميز (٣)</th><th>متمكن (٢)</th><th>يحتاج دعماً (١)</th></tr></thead>
+      <tbody>
+        <tr><td>الاستقبال والسلام</td><td>يستقبل عند الباب ويسلّم من اليمين ويُنزل الناس منازلهم</td><td>يطبّق أغلب الآداب</td><td>يغفل عن الترتيب</td></tr>
+        <tr><td>أدب الحديث</td><td>ينتظر دوره ويعترض بلطف</td><td>يقاطع أحياناً</td><td>يقاطع ويرفع صوته</td></tr>
+        <tr><td>حفظ اللسان</td><td>يصرف الحديث عن الغيبة بلباقة</td><td>يتجنّب الغيبة</td><td>يشارك فيها</td></tr>
+      </tbody>
+    </table></div>
+    <details class="key"><summary>مفتاح الإجابة للمعلم</summary><div>
+      <p>أولاً: ١-ب، ٢-ج، ٣-ب، ٤-ب.</p>
+      <p>ثانياً: ١ (✗): يتجاوزهما من خلف أحدهما؛ ٢ (✓)؛ ٣ (✗): «عدوك من بلّغك».</p>
+      <p>ثالثاً-١: العود والقهوة، ثم الغداء أو العشاء، ثم الفوالة، ثم القهوة، ثم العود.</p>
+      <p>رابعاً-١: يصرف الحديث بلطف، أو يذكر الغائب بخير، ولا ينقل الكلام إلى الجار.</p>
+    </div></details>
+  </div>
+</section>
+
+<!-- ===================== الوحدة الثالثة ===================== -->
+<section class="part" id="u3">
+  <div class="part-head">
+    <div class="unit-band"><span class="unit-num">٣</span><div><div class="eyebrow">الوحدة الثالثة · من الفصل الأول في المسودة</div><h2>سنع الضيافة: الطعام والقهوة</h2></div></div>
+    <p class="lead">الدعوة إلى الوليمة، وآداب المائدة، والقهوة العربية أدواتٍ وتقديماً وصفة.</p>
+  </div>
+
+  <h3 id="u3-out">نواتج التعلّم</h3>
+  <div class="levels">
+    <div class="lvl"><h5>المستوى الأول (٦–٧)</h5><ul><li>يطبّق آداب الأكل الجماعي.</li><li>يسمّي أدوات القهوة.</li><li>يصبّ القهوة ويقدّمها بالترتيب الصحيح.</li></ul></div>
+    <div class="lvl"><h5>المستوى الثاني (٨–٩)</h5><ul><li>يخطّط لدعوة بآدابها.</li><li>يفسّر علّة كل خطوة في تقديم القهوة.</li><li>يوازن بين أدوات الأمس واليوم.</li></ul></div>
+    <div class="lvl"><h5>المستوى الثالث (١٠–١٢)</h5><ul><li>يحلّل القهوة رمزاً ثقافياً عالمياً.</li><li>يناقش الضيافة بين الكرم والإسراف.</li><li>يقدّم عرضاً في ملف اليونسكو للقهوة.</li></ul></div>
+  </div>
+
+  <h3 id="u3-l1">الدرس الأول: الدعوة إلى المناسبة</h3>
+  <div class="prose"><p>للطعام والشراب أصول دقيقة يتعلّمها الناشئ منذ صغره، لأن سلوكه عند الولائم تظهر فيه النجابة والتوقير والكرم والمروءة والقناعة.</p></div>
+  <ul class="list">
+    <li>يدعو صاحب الوليمة ضيوفه بنفسه، أو يرسل إليهم قريباً يقدّرونه، أو يتصل بهم.</li>
+    <li>يؤكد الدعوة قبل وقت كافٍ، ويقبل اعتذار من اعتذر بتسامح.</li>
+    <li>إذا دعا ضيفاً غريباً عن الحي دعا معه جيرانه وإخوانه المقرّبين، إظهاراً لتلاحم مجتمعه.</li>
+    <li>إجابة الدعوة من شيم الرجال والنساء، ورفضها دون عذر ليس من السنع.</li>
+    <li>لا يذهب أحد إلى وليمة دون دعوة، وإن كان أهل الكرم يُكرمون حتى من جاء بغير دعوة.</li>
+  </ul>
+  <div class="box mawruth">
+    <div class="tag">من الموروث</div>
+    <p class="quote">«اللي يسير بلا دعوة ييلس بلا فراش». <span class="chip warn">يُوثَّق</span></p>
+    <p class="src">أي إن من يذهب إلى وليمة بلا دعوة لا يلوم غيره إن لم يُنزَل المنزلة اللائقة.</p>
+    <p class="quote">«ما عقب القايمة لايمة». <span class="chip warn">يُوثَّق</span></p>
+    <p class="src">أي إذا أكرمت ضيفك وقدّمت له ذبيحته فلا لوم عليك بعدها.</p>
+  </div>
+  <div class="box asl">
+    <div class="tag">من أصول السنع</div>
+    <p class="quote">«من كان يؤمن بالله واليوم الآخر فليُكرم ضيفه».</p>
+    <p class="src">متفق عليه: صحيح البخاري (٦٠١٨)، وصحيح مسلم (٤٧)، من حديث أبي هريرة رضي الله عنه.</p>
+  </div>
+
+  <h3 id="u3-l2">الدرس الثاني: آداب المائدة</h3>
+  <div class="prose"><p>يحب أهل الإمارات الجلوس على الأرض عند الطعام. يُغرف «العيش» (الأرز) واللحم أو السمك أو الدجاج في صوانٍ، ويوضع الإدام في وسطها، ويكفي الطبق الواحد عادةً خمسة إلى ثمانية أشخاص، ويُجمع إلى جانبه التمر والخضروات. ولا تُقدَّم الفاكهة والحلويات مع الطبق الرئيس، بل بعده أو مع القهوة.</p></div>
+  <div class="grid2">
+    <div class="box asl"><div class="tag">قبل الطعام وفي أثنائه</div><ul class="list">
+      <li>يبدأ بالتسمية، ويأكل بيمينه، ومما يليه.</li>
+      <li>يجلس معتدلاً، فلا يتكئ ولا يميل ولا يأكل واقفاً.</li>
+      <li>لا يخصّ نفسه باللحم، بل يقطع منه لمن يجاوره.</li>
+      <li>إذا سعل أو عطس أشاح بوجهه أو غطّاه بغترته أو بمنديل.</li>
+      <li>يضع نواة التمر بيده على المفرش، ولا يلفظها من فمه أمام الآكلين.</li>
+      <li>يتحدث حديثاً هادئاً لا يعيب الطعام ولا ما يُنفّر منه.</li>
+    </ul></div>
+    <div class="box asl"><div class="tag">بعد الطعام</div><ul class="list">
+      <li>يحمد الله، ويدعو لصاحب الطعام: «أكرمك الله يا بو فلان»، فيردّ: «هني وعافية».</li>
+      <li>لا يعيب طعاماً قط.</li>
+      <li>لا ينثر بقية طعامه على الأرض.</li>
+      <li>لا يقوم صاحب الدعوة حتى يقوم الضيف.</li>
+      <li>لا يغادر الضيف مباشرة بعد الطعام.</li>
+    </ul></div>
+  </div>
+  <div class="box edit"><div class="tag">ملاحظة تحريرية</div><p>حُذفت من المسودة عبارة «أثبتت الدراسات» عن هيئة الجلوس لأنها بلا مصدر. وصفة الجلسة باقية: ثني الرِّجل اليمنى منتصبة، وافتراش اليسرى، والأكل باليمنى.</p></div>
+
+  <h3 id="u3-l3">الدرس الثالث: القهوة العربية</h3>
+  <div class="prose">
+    <p>القهوة أعزّ مشروبات الضيافة عند أهل الإمارات، وهي من لوازمهم في الحِلّ والترحال. وإعدادها مهارة يحسن بكل فتى وفتاة تعلّمها، لأنها أول ما يُكرم به الضيف وآخر ما يودَّع به. وفي ملف «القهوة العربية: رمز الكرم» الذي سجّلته اليونسكو عام ٢٠١٥ أن التقديم يكون باليد اليمنى، ويبدأ بالأكبر سناً أو مقاماً وبالضيوف، وأن الضيف يهزّ فنجانه علامة على الاكتفاء.</p>
+  </div>
+  <h4>أدوات القهوة</h4>
+  <figure class="fig">
+    <svg viewBox="0 0 640 210" width="100%" role="img" aria-label="الدلال الثلاث مرتبة من الأكبر إلى الأصغر: الخمرة، التلقيمة، المزلة">
+      <g style="font-size:15px">
+        <!-- الخمرة -->
+        <path d="M500 170 L520 70 L580 70 L600 170 Z" style="fill:var(--tint-gold);stroke:var(--gold);stroke-width:2"/>
+        <path d="M520 70 Q550 40 580 70" style="fill:none;stroke:var(--gold);stroke-width:2"/>
+        <path d="M520 95 Q480 95 470 70" style="fill:none;stroke:var(--gold);stroke-width:3"/>
+        <text x="550" y="195" text-anchor="middle" style="fill:var(--ink);font-weight:700">الخمرة</text>
+        <!-- التلقيمة -->
+        <path d="M290 170 L305 92 L355 92 L370 170 Z" style="fill:var(--tint-gold);stroke:var(--gold);stroke-width:2"/>
+        <path d="M305 92 Q330 68 355 92" style="fill:none;stroke:var(--gold);stroke-width:2"/>
+        <path d="M305 112 Q272 112 264 92" style="fill:none;stroke:var(--gold);stroke-width:3"/>
+        <text x="330" y="195" text-anchor="middle" style="fill:var(--ink);font-weight:700">التلقيمة</text>
+        <!-- المزلة -->
+        <path d="M95 170 L106 112 L144 112 L155 170 Z" style="fill:var(--tint-gold);stroke:var(--gold);stroke-width:2"/>
+        <path d="M106 112 Q125 94 144 112" style="fill:none;stroke:var(--gold);stroke-width:2"/>
+        <path d="M106 128 Q80 128 74 112" style="fill:none;stroke:var(--gold);stroke-width:3"/>
+        <text x="125" y="195" text-anchor="middle" style="fill:var(--ink);font-weight:700">المزلّة</text>
+        <line x1="20" y1="172" x2="620" y2="172" style="stroke:var(--line)"/>
+      </g>
+    </svg>
+    <figcaption>شكل ٢: الدلال النحاسية الثلاث من الأكبر إلى الأصغر. رسم توضيحي غير مقيس.</figcaption>
+  </figure>
+  <div class="tbl"><table>
+    <thead><tr><th>الأداة</th><th>وظيفتها</th></tr></thead>
+    <tbody>
+      <tr><td>المحماس والتاوة</td><td>لتحميص حبوب البن.</td></tr>
+      <tr><td>الخمرة</td><td>كبرى الدلال، يُغلى فيها الماء أو القهوة.</td></tr>
+      <tr><td>التلقيمة (وتُكتب التلجيمة)</td><td>الوسطى، تُجمع فيها القهوة مع «القنّاد» من الهيل والزعفران، أو تُصفّى فيها. <span class="chip warn">تختلف المصادر في تفصيل وظيفتها</span></td></tr>
+      <tr><td>المزلّة</td><td>الصغرى، تُصبّ منها القهوة للضيف.</td></tr>
+      <tr><td>الفناجين</td><td>متوسطة الحجم، سليمة من الكسر والثلم.</td></tr>
+    </tbody>
+  </table></div>
+  <p style="max-width:72ch">وقد حلّت في المجالس الحديثة الدلال الحافظة للحرارة، تكون اثنتين غالباً: واحدة للقهوة وأخرى للشاي. وتغيّرت الأداة، لكن السنع واحد.</p>
+
+  <h4>طريقة تقديم القهوة</h4>
+  <figure class="fig">
+    <svg viewBox="0 0 420 300" width="100%" style="max-width:520px" role="img" aria-label="ترتيب الصب في المجلس: يبدأ بصدر المجلس ثم يدور الصاب إلى يمينه">
+      <g style="font-size:14px">
+        <rect x="40" y="40" width="340" height="220" rx="10" style="fill:none;stroke:var(--line);stroke-width:2"/>
+        <text x="210" y="28" text-anchor="middle" style="fill:var(--muted)">صدر المجلس</text>
+        <circle cx="210" cy="60" r="18" style="fill:var(--gold)"/><text x="210" y="65" text-anchor="middle" style="fill:var(--sheet);font-weight:700">١</text>
+        <circle cx="150" cy="60" r="16" style="fill:var(--navy)"/><text x="150" y="65" text-anchor="middle" style="fill:var(--sheet)">٢</text>
+        <circle cx="90" cy="60" r="16" style="fill:var(--navy)"/><text x="90" y="65" text-anchor="middle" style="fill:var(--sheet)">٣</text>
+        <circle cx="60" cy="140" r="16" style="fill:var(--navy)"/><text x="60" y="145" text-anchor="middle" style="fill:var(--sheet)">٤</text>
+        <circle cx="60" cy="210" r="16" style="fill:var(--navy)"/><text x="60" y="215" text-anchor="middle" style="fill:var(--sheet)">٥</text>
+        <circle cx="360" cy="140" r="16" style="fill:var(--tint-navy);stroke:var(--navy)"/><text x="360" y="145" text-anchor="middle" style="fill:var(--ink)">…</text>
+        <circle cx="270" cy="60" r="16" style="fill:var(--tint-navy);stroke:var(--navy)"/><text x="270" y="65" text-anchor="middle" style="fill:var(--ink)">…</text>
+        <path d="M190 88 Q120 110 76 128" style="fill:none;stroke:var(--gold);stroke-width:2;stroke-dasharray:5 4"/>
+        <polygon points="76,128 88,118 90,130" style="fill:var(--gold)"/>
+        <text x="210" y="160" text-anchor="middle" style="fill:var(--ink)">يدور الصبّاب إلى يمين</text>
+        <text x="210" y="182" text-anchor="middle" style="fill:var(--ink)">الكبير ثم من يليه</text>
+        <text x="210" y="282" text-anchor="middle" style="fill:var(--muted)">الباب</text>
+      </g>
+    </svg>
+    <figcaption>شكل ٣: يبدأ الصبّ بصاحب صدر المجلس (١)، ثم يتوالى على يمينه دون أن يتخطى أحداً.</figcaption>
+  </figure>
+  <ul class="list">
+    <li>تُقدَّم القهوة فور قدوم الضيف وجلوسه، وبعد كل حلو أو تمر، وفي آخر المجلس قبل انصرافه.</li>
+    <li>تُحمل الدلّة باليد اليسرى، ويُقدَّم الفنجان باليمنى.</li>
+    <li>يبدأ بالكبير أو صاحب المقام أو صدر المجلس، ثم يسير الصبّاب على يمينه حتى يتم المجلس، ولا يتخطى أحداً إلا من اعتذر.</li>
+    <li>يصبّ قدر ثلث الفنجان، ويقف منتظراً دون استعجال، فإذا أعاد الضيف الفنجان صبّ له، حتى يهزّه علامةً على الاكتفاء.</li>
+    <li>يعيد الضيف الفنجان إلى يد الصبّاب، ولا يضعه على الأرض.</li>
+    <li>يختبر المعزّب (المضيف) قهوته قبل تقديمها، فلا يقدّم قهوة باردة، ولا عكرة من بقايا الدلّة، ولا فنجاناً مثلوماً.</li>
+    <li>يصبّ المضيف بنفسه إكراماً، أو يستعين بأصغر أبنائه، أو يتخذ صبّاباً في المجالس الكبيرة والمناسبات.</li>
+  </ul>
+  <div class="box mawruth">
+    <div class="tag">من الموروث</div>
+    <p>تُسمّى الفناجين في الذاكرة الشعبية بحسب ترتيبها: <b>الهيف</b> وهو فنجان يشربه المعزّب ليختبر القهوة، ثم <b>الضيف</b>، ثم <b>الكيف</b>، ثم <b>السيف</b>. <span class="chip ok">موثَّق</span></p>
+    <p class="src">ورد في الصحافة الإماراتية (الإمارات اليوم، أكتوبر ٢٠٢٢؛ البيان، ٢٠٠٨).</p>
+    <p class="quote">«ما بعد العود قعود». <span class="chip ok">موثَّق</span></p>
+    <p class="src">تقديم العود والطيب إيذان بختام المجلس.</p>
+    <p class="quote">«فنيال قهوة الضحى أخير من ذلول». <span class="chip warn">يُوثَّق</span></p>
+    <p class="src">أي إن فنجان قهوة الضحى أعزّ عندهم من ناقة ذلول.</p>
+  </div>
+  <h4>صفة قهوة أهل الإمارات</h4>
+  <ul class="list">
+    <li>ليست سوداء مُرّة ولا شفافة، بل وسط بين ذلك، وحمسها متوسط، ويميّزها طعم الهيل والزعفران.</li>
+    <li>تُعدّ وتُقدَّم في حينها، ولا تُخزَّن، ولا يُعاد تسخينها إن بردت.</li>
+  </ul>
+
+  <h3 id="u3-l4">الدرس الرابع: الحليب والمشروبات الأخرى</h3>
+  <div class="prose"><p>من أهم ما يُقدَّم للضيف في المناطق الداخلية «حليب النوق»، ويُقدَّم بترتيب القهوة: يُبتدأ بالضيف أو الكبير أو من على اليمين. ولا يستأثر الشارب بالإناء، بل يمرّره إلى يمينه، ولا ينفخ فيه. ولا يُقدَّم ما يُشرب حاراً بارداً، ولا ما يُشرب بارداً حاراً.</p></div>
+
+  <div class="box act">
+    <div class="tag">نشاط أداء · المستوى الأول</div>
+    <p><b>الصبّاب الصغير:</b> يتدرّب الطلاب في مجموعات على حمل الدلّة وتقديم الفنجان وترتيب الدوران، ويقيّم كل فريق الآخر بسلّم التقدير.</p>
+  </div>
+
+  <div class="assess" id="u3-assess">
+    <h3>المراجعة والتقييم</h3>
+    <h4>أولاً: اختر الإجابة الصحيحة</h4>
+    <ol>
+      <li>تُحمل دلّة القهوة باليد:<div class="opts"><span>أ) اليمنى</span><span>ب) اليسرى</span><span>ج) بكلتا اليدين</span></div></li>
+      <li>يصبّ الصبّاب في الفنجان قدر:<div class="opts"><span>أ) نصفه</span><span>ب) كامله</span><span>ج) ثلثه</span><span>د) ربعه</span></div></li>
+      <li>الدلّة الصغرى التي تُصبّ منها القهوة هي:<div class="opts"><span>أ) الخمرة</span><span>ب) المزلّة</span><span>ج) التلقيمة</span><span>د) المحماس</span></div></li>
+      <li>فنجان «الهيف» هو الذي:<div class="opts"><span>أ) يشربه الضيف أولاً</span><span>ب) يختبر به المعزّب القهوة</span><span>ج) يُقدَّم آخر المجلس</span></div></li>
+    </ol>
+    <h4>ثانياً: ضع علامة (✓) أو (✗) وصحّح الخطأ</h4>
+    <ol>
+      <li>تُقدَّم الحلويات مع الطبق الرئيس. ( )</li>
+      <li>يُعاد تسخين القهوة إذا بردت. ( )</li>
+      <li>يضع الضيف الفنجان على الأرض عند الاكتفاء. ( )</li>
+      <li>يهزّ الضيف الفنجان علامةً على الاكتفاء. ( )</li>
+    </ol>
+    <h4>ثالثاً: أجب بإيجاز</h4>
+    <ol>
+      <li><span class="chip lv">م١</span> صف ثلاثة من آداب الأكل الجماعي.</li>
+      <li><span class="chip lv">م٢</span> لماذا لا يُقدَّم فنجان مثلوم ولا قهوة باردة؟ اربط ذلك بمقام الضيف.</li>
+      <li><span class="chip lv">م٣</span> متى ينقلب الكرم إسرافاً؟ ناقش في ضوء قيم الاستدامة وحفظ النعمة.</li>
+    </ol>
+    <h4>رابعاً: موقف وتصرّف</h4>
+    <p>دخل ضيف كبير السن بعد أن بدأ صبّ القهوة، وجلس في الطرف. كيف يتصرف الصبّاب؟</p>
+    <details class="key"><summary>مفتاح الإجابة للمعلم</summary><div>
+      <p>أولاً: ١-ب، ٢-ج، ٣-ب، ٤-ب.</p>
+      <p>ثانياً: ١ (✗) تُقدَّم بعده أو مع القهوة؛ ٢ (✗) لا يُعاد تسخينها؛ ٣ (✗) يعيده إلى يد الصبّاب؛ ٤ (✓).</p>
+      <p>رابعاً: يُرحَّب به ويُقدَّم له الفنجان مراعاةً لسنّه ومقامه، أو يُفسح له في الصدر إن أمكن، ثم يستأنف الدوران.</p>
+    </div></details>
+  </div>
+</section>
+
+<!-- ===================== الوحدة الرابعة ===================== -->
+<section class="part" id="u4">
+  <div class="part-head">
+    <div class="unit-band"><span class="unit-num">٤</span><div><div class="eyebrow">الوحدة الرابعة · من الفصل الأول في المسودة</div><h2>سنع الطريق والتواصل والزيارات</h2></div></div>
+    <p class="lead">حق الطريق، والاستئذان، وصلة الأرحام، وعيادة المريض، والتهنئة، والتعزية.</p>
+  </div>
+
+  <h3 id="u4-out">نواتج التعلّم</h3>
+  <div class="levels">
+    <div class="lvl"><h5>المستوى الأول (٦–٧)</h5><ul><li>يطبّق آداب الطريق والاستئذان.</li><li>يحفظ عبارات التهنئة والمواساة وردودها.</li></ul></div>
+    <div class="lvl"><h5>المستوى الثاني (٨–٩)</h5><ul><li>يخطّط لزيارة مريض أو تهنئة بآدابها.</li><li>يربط حق الطريق بالذوق العام والسلامة.</li></ul></div>
+    <div class="lvl"><h5>المستوى الثالث (١٠–١٢)</h5><ul><li>يحلّل التكافل في المناسبات بوصفه شبكة أمان اجتماعي.</li><li>يقترح مبادرة حيّ تحيي سنع التواصل.</li></ul></div>
+  </div>
+
+  <h3 id="u4-l1">الدرس الأول: آداب الطريق</h3>
+  <div class="prose"><p>للطريق حرمة كحرمة البيوت، ويتعارف الناس على نبذ من يتعدّى فيه. ومن سنع الطريق:</p></div>
+  <ul class="list">
+    <li>لا ينظر المارّ في باب مفتوح، ولا يعترض طريق صغير أو امرأة.</li>
+    <li>إذا رأى عائقاً من غصن أو حجر أو شوك أزاله، ويعتني بالساحة أمام بيته كما يعتني بفنائه.</li>
+    <li>إذا لقي أحداً سلّم عليه وسأله عن أهله: «شحال تواليك؟» أي من وراءك من الأهل، ثم يحمّله السلام إلى أبيه أو أخيه.</li>
+    <li>إذا حُمِّل رسالة أو وصية أدّاها كما هي: «الوصاة حصاة». <span class="chip warn">يُوثَّق</span></li>
+    <li>يقف للكبير، ولا يعترض الغريب، ويردّ السلام على الماشي والراكب.</li>
+    <li>تكون ألعاب الصغار بعيدة عن مداخل البيوت، وينتهي اللعب بالأذان ودخول الليل.</li>
+    <li>لا يخرج إلى الطريق بلباس البيت، ولا يكشف من جسده إلا لحاجة كالسباحة والرياضة.</li>
+  </ul>
+  <div class="box edit"><div class="tag">امتداد معاصر · المستوى الثاني</div><p>حق الطريق اليوم يشمل: احترام إشارات المرور، وعدم رمي المخلفات من نوافذ السيارات، وإفساح الطريق لسيارات الإسعاف، وعدم إزعاج الجيران بأصوات المركبات.</p></div>
+
+  <h3 id="u4-l2">الدرس الثاني: الاستئذان</h3>
+  <div class="prose"><p>إذا قصد منزل أحد طرق الباب، ثم وقف إلى جانبه لا يواجه المدخل بوجهه. وإن وجد الباب مفتوحاً وكان قريباً مأذوناً له نادى أهل البيت قبل الدخول، فإن أُذن له دخل إلى المجلس أو حيث يؤذن له. <span class="chip warn">صيغ النداء والإذن المحلية تُوثَّق ميدانياً</span></p></div>
+  <div class="box asl">
+    <div class="tag">من أصول السنع</div>
+    <p class="verse">﴿يَا أَيُّهَا الَّذِينَ آمَنُوا لَا تَدْخُلُوا بُيُوتًا غَيْرَ بُيُوتِكُمْ حَتَّى تَسْتَأْنِسُوا وَتُسَلِّمُوا عَلَى أَهْلِهَا﴾</p>
+    <p class="src">سورة النور، من الآية ٢٧.</p>
+  </div>
+
+  <h3 id="u4-l3">الدرس الثالث: الزيارات</h3>
+  <h4>صلة الأرحام</h4>
+  <div class="prose"><p>زيارة الأرحام دائمة لا ترتبط بموعد، وهي أولى في العيدين ورمضان والجُمَع. وتكون للوالدين والإخوة والأعمام والأخوال. يقبّل الزائر رأس والديه في كل حال، ويحمل إليهم الهدايا. وإذا دخل عليهم وهم يأكلون قال: «هنّهم»، فيقولون: «اقرب»، فيردّ: «قريب».</p></div>
+  <h4>عيادة المريض</h4>
+  <div class="prose"><p>إذا سمع بمرض قريب أو جار أو صديق، أو بعودته من رحلة علاج، زاره مهما بعدت المسافة، لكنه يتخيّر وقتاً لا يزعجه، فلا يأتيه في وقت نوم أو طعام. ويحمل معه شيئاً، ولا يطيل الجلوس.</p></div>
+  <div class="tbl"><table>
+    <thead><tr><th>المناسبة</th><th>عبارة الزائر</th><th>الرد المأثور</th></tr></thead>
+    <tbody>
+      <tr><td>زيارة المريض</td><td>«ماجور»، «أجر وعافية»</td><td>«الله يأجرك»</td></tr>
+      <tr><td>بعد حادث أو إصابة</td><td>«ما تشوف شر يا بو فلان»، «تستاهل السلامة»</td><td>«الله يأجرك»، «الشر ما ييك»</td></tr>
+      <tr><td>لأهل المريض</td><td>«تستاهلون سلامة فلان»</td><td>«الله يسلّمك»</td></tr>
+      <tr><td>الزواج</td><td>«الله يبارك لك»، «مبروك ما دبّرت»، «الله يرزقك الذرية الصالحة»</td><td>«الله يبارك فيك»</td></tr>
+      <tr><td>المولود</td><td>«يتربّى بعزّك»</td><td>«الله يبارك فيك»</td></tr>
+      <tr><td>النجاح والفوز</td><td>«تستاهل الناموس»</td><td>«الله يسلّمك»</td></tr>
+      <tr><td>العزاء</td><td>«أحسن الله عزاكم»، «عظّم الله أجركم»</td><td>«الدوام لله»، «خلف الله»</td></tr>
+    </tbody>
+  </table></div>
+  <p class="small muted">العبارات على رواية المسودة؛ ويُستحسن أن يجمع الطلاب صيغها المحلية من كبار السن في كل إمارة.</p>
+
+  <h4>الزواج والتهاني</h4>
+  <div class="prose"><p>الزواج دعوة عامة لمن بلغه من الأهل والأصحاب والجيران، فإن جاءته دعوة خاصة وجبت إجابتها والإسراع إليها والتهيؤ بأحسن الثياب. ومن عادة الأقارب ألا يتأخروا عن المعونة بقدر الاستطاعة، وأن يحضروا المجلس من أوله. ويُزار العائد من الحج والعمرة، ويرسل الحاجّ إلى جيرانه ماء زمزم وهدايا الحج.</p></div>
+  <h4>المواساة والتعازي</h4>
+  <div class="prose"><p>كما يشارك أهل السنع في الأفراح يشاركون في الأحزان. فإن أصاب أحدَهم فقدُ مال زاره وأعانه إن قدر وبشّره بالعوض. وإن تُوفي قريب أو جار حضروا الصلاة عليه ودفنه، ووقفوا في عزائه، وأعانوا أهل الميت بالطعام. ولا يطيل المعزّي الجلوس ليترك المكان لغيره، ولا يضحك، ولا يتحدث إلا بما يخفّف عن أهل المتوفى.</p></div>
+  <h4>تفقّد الأرملة واليتيم وكبار السن</h4>
+  <div class="prose"><p>يرى أهل الإمارات تفقّد أهل الجار المتوفى أو المسافر من الواجبات، فيرسلون نساءهم للسؤال عن أحوالهم. ولا يمر رمضان أو عيد حتى يتعهّدوهم بالمعونة، طبعاً لا تكلّفاً. ومن وقف على باب امرأة كبيرة للسؤال لم يُطل الوقوف: يسأل عن حاجتها وينصرف.</p></div>
+  <div class="box asl">
+    <div class="tag">من أصول السنع</div>
+    <p class="quote">«حقّ المسلم على المسلم خمس: ردّ السلام، وعيادة المريض، واتباع الجنائز، وإجابة الدعوة، وتشميت العاطس».</p>
+    <p class="src">متفق عليه: صحيح البخاري (١٢٤٠)، وصحيح مسلم (٢١٦٢)، من حديث أبي هريرة رضي الله عنه.</p>
+    <p class="verse">﴿وَإِذَا حُيِّيتُمْ بِتَحِيَّةٍ فَحَيُّوا بِأَحْسَنَ مِنْهَا أَوْ رُدُّوهَا﴾</p>
+    <p class="src">سورة النساء، من الآية ٨٦.</p>
+  </div>
+
+  <div class="box act">
+    <div class="tag">نشاط · المستوى الثالث</div>
+    <p><b>خريطة التكافل في حيّي:</b> يرسم الطالب شبكة الزيارات في مناسبة واحدة عاشها (عرس أو عزاء أو عيد): من زار من؟ ومن أعان بماذا؟ ثم يكتب فقرة: ماذا كان سيحدث لهذه الأسرة لو غابت هذه الشبكة؟</p>
+  </div>
+
+  <div class="assess" id="u4-assess">
+    <h3>المراجعة والتقييم</h3>
+    <h4>أولاً: صِل العبارة بمناسبتها</h4>
+    <div class="tbl"><table>
+      <thead><tr><th>العبارة</th><th>المناسبة</th></tr></thead>
+      <tbody>
+        <tr><td>١. يتربّى بعزّك</td><td>أ) العزاء</td></tr>
+        <tr><td>٢. عظّم الله أجركم</td><td>ب) النجاح</td></tr>
+        <tr><td>٣. تستاهل الناموس</td><td>ج) المولود</td></tr>
+        <tr><td>٤. أجر وعافية</td><td>د) زيارة المريض</td></tr>
+      </tbody>
+    </table></div>
+    <h4>ثانياً: ضع علامة (✓) أو (✗) وصحّح الخطأ</h4>
+    <ol>
+      <li>يقف المستأذن مواجهاً الباب ليراه أهل البيت. ( )</li>
+      <li>يُستحب أن يطيل الزائر الجلوس عند المريض. ( )</li>
+      <li>زيارة الأرحام لا ترتبط بموعد ولا مناسبة. ( )</li>
+    </ol>
+    <h4>ثالثاً: أجب بإيجاز</h4>
+    <ol>
+      <li><span class="chip lv">م١</span> اذكر ثلاثة من آداب الطريق.</li>
+      <li><span class="chip lv">م٢</span> لماذا لا يطيل المعزّي الجلوس ولا يطيل الزائر جلوسه عند المريض؟ ما القيمة المشتركة؟</li>
+      <li><span class="chip lv">م٣</span> «المناسبات الاجتماعية شبكة أمان». حلّل العبارة.</li>
+    </ol>
+    <h4>رابعاً: موقف وتصرّف</h4>
+    <p>علمت أن زميلك في الصف عاد من رحلة علاج طويلة. خطّط لزيارته: الوقت، وما تحمله، وما تقوله، ومدة الزيارة.</p>
+    <details class="key"><summary>مفتاح الإجابة للمعلم</summary><div>
+      <p>أولاً: ١-ج، ٢-أ، ٣-ب، ٤-د.</p>
+      <p>ثانياً: ١ (✗) يقف إلى جانب الباب؛ ٢ (✗) لا يطيل ليترك له الراحة؛ ٣ (✓).</p>
+      <p>ثالثاً-٢: مراعاة حال المزور وراحته، وإفساح المجال لغيره.</p>
+    </div></details>
+  </div>
+</section>
+
+<!-- ===================== الوحدة الخامسة ===================== -->
+<section class="part" id="u5">
+  <div class="part-head">
+    <div class="unit-band"><span class="unit-num">٥</span><div><div class="eyebrow">الوحدة الخامسة · من الفصل الثاني في المسودة · عام الأسرة ٢٠٢٦</div><h2>سنع الأسرة والعلاقات الاجتماعية</h2></div></div>
+    <p class="lead">الوالدان، والمرأة في الأسرة والمجتمع، والأبناء، وكبار السن، والجار، والتعايش مع المقيمين.</p>
+  </div>
+
+  <h3 id="u5-out">نواتج التعلّم</h3>
+  <div class="levels">
+    <div class="lvl"><h5>المستوى الأول (٦–٧)</h5><ul><li>يعدّد صور البرّ بالوالدين.</li><li>يطبّق آداب توقير الكبير.</li><li>يذكر حقوق الجار.</li></ul></div>
+    <div class="lvl"><h5>المستوى الثاني (٨–٩)</h5><ul><li>يفسّر تحوّل الأسرة من الممتدة إلى النووية وأثره.</li><li>يبيّن مكانة المرأة في المجتمع الإماراتي.</li><li>يمارس التعايش مع المختلف.</li></ul></div>
+    <div class="lvl"><h5>المستوى الثالث (١٠–١٢)</h5><ul><li>يربط السنع الأسري بالتشريعات الاتحادية.</li><li>يحلّل أثر التغير الاجتماعي في صلة الرحم.</li><li>يقترح مبادرة لعام الأسرة.</li></ul></div>
+  </div>
+
+  <h3 id="u5-l1">الدرس الأول: الوالدان</h3>
+  <div class="prose">
+    <p>مقام الوالدين عالٍ، يلتزم الإنسان طاعتهما ورعاية حاجاتهما صغيراً وكبيراً، ويواصل زيارتهما إذا تزوّج وخرج من بيتهما. وكانت الأسرة الإماراتية ممتدة تسكن بيتاً كبيراً يضم الآباء والأبناء وزوجاتهم والأحفاد، يأكل الرجال من ماعون واحد وتأكل النساء من ماعون واحد، فتعمّ البركة والأُخوّة. ومع التغير الاجتماعي صارت الأسرة الصغيرة هي الغالبة، لكن الصلة بقيت بالأجداد والأعمام والأخوال.</p>
+  </div>
+  <ul class="list">
+    <li>زيارتهما وعدم قطع الصلة بهما.</li>
+    <li>طاعتهما في المعروف وتقديمهما على من سواهما.</li>
+    <li>عدم رفع الصوت عندهما، ولا الإشارة باليد في وجهيهما.</li>
+    <li>تقبيل الرأس واليد.</li>
+    <li>الإنفاق عليهما عند الحاجة، ومواصلتهما بالهدايا.</li>
+  </ul>
+  <div class="box asl">
+    <div class="tag">من أصول السنع</div>
+    <p class="verse">﴿فَلَا تَقُلْ لَهُمَا أُفٍّ وَلَا تَنْهَرْهُمَا وَقُلْ لَهُمَا قَوْلًا كَرِيمًا﴾</p>
+    <p class="src">سورة الإسراء، من الآية ٢٣.</p>
+  </div>
+
+  <h3 id="u5-l2">الدرس الثاني: المرأة في الأسرة والمجتمع</h3>
+  <div class="prose">
+    <p>كان الرجل في الماضي يخرج للرزق في السفر ورحلات الغوص شهوراً، فكانت المرأة قائمة على بيتها ومجتمعها، تسدّ مسدّ الرجل في غيابه إلى جانب مهامها. لذلك يحفظ المجتمع للمرأة مآثر الشراكة في كل شيء. ومن مظاهر السنع في ذلك:</p>
+  </div>
+  <ul class="list">
+    <li>يساوي الأب بين الولد والبنت في الإنفاق والعطاء والإكرام والتربية.</li>
+    <li>من المروءة ألا يمدّ الرجل يده على امرأة مهما كانت الأسباب، قريبة كانت أو غريبة، كبيرة أو صغيرة؛ ويُعدّ ذلك عيباً كبيراً.</li>
+    <li>لا تُزوَّج المرأة دون رضاها، ولا يؤخذ من مالها دون موافقتها.</li>
+    <li>يتحمّل الزوج النفقة على الأسرة من مسكن وملبس ورعاية، ولا تُحمَّل المرأة ذلك دون اختيارها.</li>
+    <li>كل امرأة في الطريق مصونة العرض والسمعة؛ لا يعترضها أحد ولا يفزعها، ولا يقبل السنيع ذلك من غيره.</li>
+  </ul>
+  <div class="box law">
+    <div class="tag">السنع والقانون</div>
+    <p>يحظر قانون الأحوال الشخصية تزويج البنت بغير رضاها، ويجعل رضا الزوجة شرطاً في عقد الزواج.</p>
+    <p class="src">مرسوم بقانون اتحادي رقم (٤١) لسنة ٢٠٢٤ بإصدار قانون الأحوال الشخصية، المادة ٢١ (البند ٤) والمادة ٢٦ (البند ٣)؛ يُعمل به منذ ١٥ أبريل ٢٠٢٥، وحلّ محل القانون الاتحادي رقم (٢٨) لسنة ٢٠٠٥.</p>
+  </div>
+
+  <h3 id="u5-l3">الدرس الثالث: الأبناء</h3>
+  <div class="prose"><p>أهل الإمارات ودودون عطوفون على الأطفال، يتلطّفون معهم ويكرمونهم في المجالس. ومن سنعهم في تربيتهم:</p></div>
+  <ul class="list">
+    <li>تسميتهم بالأسماء الحسنة المتعارف عليها في الأسرة، والحرص على العقيقة عنهم.</li>
+    <li>تعليمهم الصلاة والصيام، وتحفيظهم سوراً من القرآن الكريم.</li>
+    <li>اصطحابهم إلى المجالس، وتعريفهم بالناس، وتعليمهم عادات الكبار.</li>
+    <li>تكليفهم بقضاء حاجات البيت ليعتادوا الاعتماد على النفس.</li>
+    <li>إشراكهم في الضيافة: استقبال الضيوف وصبّ القهوة.</li>
+    <li>حثّهم على دعوة أصدقائهم والتعرّف إليهم.</li>
+    <li>التأديب بالقدوة والحوار والتكليف والمكافأة، لا بالعنف.</li>
+  </ul>
+  <div class="box law">
+    <div class="tag">السنع والقانون</div>
+    <p>يكفل قانون حقوق الطفل «وديمة» احترام خصوصية الطفل، ويحظر تعريض سلامته البدنية أو النفسية للخطر، والمساس بأمانه العاطفي.</p>
+    <p class="src">قانون اتحادي رقم (٣) لسنة ٢٠١٦ بشأن حقوق الطفل «وديمة»، المواد ٥ و٣٤ و٣٦ (بحسب نص ٢٠١٦؛ تُراجع الأرقام على آخر نسخة معدّلة في بوابة التشريعات).</p>
+  </div>
+
+  <h3 id="u5-l4">الدرس الرابع: كبار السن</h3>
+  <div class="prose"><p>لكبار السن في مجتمع الإمارات توقير خاص؛ فكل كبير أبٌ، وكل صغير ابن، وبهذا قامت لُحمة المجتمع. ومن واجب الصغار نحو الكبار:</p></div>
+  <ul class="list">
+    <li>تقديمهم في المشي والدخول والجلوس والطعام والشراب.</li>
+    <li>الإصغاء إلى نصحهم وحديثهم، والبدء بالسلام عليهم.</li>
+    <li>تفقّد أحوالهم في الحي، وزيارتهم، ودعوتهم، والأخذ بأيديهم إلى المسجد والمناسبات.</li>
+  </ul>
+  <div class="box asl">
+    <div class="tag">من أصول السنع</div>
+    <p class="quote">«ليس منّا من لم يرحم صغيرنا ويعرف شرف كبيرنا».</p>
+    <p class="src">رواه الترمذي في سننه (ت. شاكر ٤/٣٢٢) وأبو داود، من حديث عبد الله بن عمرو رضي الله عنهما؛ وقال الترمذي: حسن صحيح.</p>
+  </div>
+  <div class="box law">
+    <div class="tag">السنع والقانون</div>
+    <p>يكفل القانون لكبار المواطنين (٦٠ عاماً فأكثر) الاستقلالية والخصوصية، والحماية من الإساءة والإهمال، والأولوية في الخدمات.</p>
+    <p class="src">قانون اتحادي رقم (٩) لسنة ٢٠١٩ بشأن حقوق كبار المواطنين.</p>
+  </div>
+
+  <h3 id="u5-l5">الدرس الخامس: الجار</h3>
+  <div class="prose"><p>العلاقة مع الجار من أدقّ العلاقات في مجتمع الإمارات؛ يكاد الجار يكون قريباً قرابة الدم، له حقوق وعلينا تجاهه واجبات.</p></div>
+  <div class="box asl">
+    <div class="tag">من أصول السنع</div>
+    <p class="verse">﴿وَبِالْوَالِدَيْنِ إِحْسَانًا وَبِذِي الْقُرْبَى وَالْيَتَامَى وَالْمَسَاكِينِ وَالْجَارِ ذِي الْقُرْبَى وَالْجَارِ الْجُنُبِ﴾</p>
+    <p class="src">سورة النساء، من الآية ٣٦.</p>
+    <p class="quote">«ما زال جبريل يوصيني بالجار حتى ظننت أنه سيورّثه».</p>
+    <p class="src">متفق عليه: صحيح البخاري (٦٠١٤، ٦٠١٥)، وصحيح مسلم (٢٦٢٤، ٢٦٢٥)، من حديث عائشة وابن عمر رضي الله عنهم.</p>
+  </div>
+  <div class="box mawruth">
+    <div class="tag">من الموروث</div>
+    <p class="verse">تَتَّقي الخطا والجار وفِّرْ حقوقه … على كل حالٍ واحترم كل غطرافي</p>
+    <p class="src">مبارك بن حمد العقيلي (١٨٧٥–١٩٥٥م تقريباً).</p>
+    <p class="verse">واصفح عن اليار الذي لك ملازم … وان يتك زلّات عليك احتمالها</p>
+    <p class="src">يعقوب بن يوسف الحاتمي (١٨١٥–١٩٠٥م تقريباً)، من أم القيوين.</p>
+    <p class="quote">«الجار جار ولو جار». <span class="chip ok">متداول خليجياً</span></p>
+    <p class="quote">«عليك بالجار ولو عال، وعليك بالدرب ولو طال». <span class="chip warn">يُوثَّق</span></p>
+    <p class="quote">«جارك خشمك». <span class="chip bad">غير موثَّق بهذه الصيغة</span></p>
+    <p class="src">الموثَّق في المصادر صيغة «ربيعك خشمك» أي صديقك بمنزلة أنفك. يُترك المثل للتحقق الميداني في المشروع البحثي.</p>
+  </div>
+  <ul class="list">
+    <li>حفظ عرضه بغضّ البصر عن عورات بيته وستر ما يُطَّلع عليه من أسراره.</li>
+    <li>عدم إزعاجه بالأصوات العالية أو الأدخنة، وعدم رمي المخلفات أمام بيته.</li>
+    <li>تفقّد أهله في غيابه، وإعانتهم عند الحاجة.</li>
+    <li>دعوته إلى الولائم كأنه من الأقارب، ومشاركته أفراحه وأحزانه.</li>
+    <li>السلام عليه وردّ سلامه، وزيارته في الأعياد، وعيادته في المرض.</li>
+  </ul>
+
+  <h3 id="u5-l6">الدرس السادس: التعايش مع المقيمين وأتباع الأديان</h3>
+  <div class="prose">
+    <p>استقبل مجتمع الإمارات منذ القدم الوافد إليه على اختلاف جنسيته ودينه، فتعايش معه، ولم يذمّ دينه أمامه، ودعاه إلى كثير من مناسباته. وفي المقابل يحرص المقيم على احترام عادات المجتمع وتقاليده في لباسه وتصرفاته. ويحفظ الإماراتي مع ذلك هويته، فلا يتشبّه بغيره في لباسه وسلوكه تشبّهاً يذيب خصوصيته.</p>
+  </div>
+  <div class="box asl"><div class="tag">من أصول السنع</div>
+    <p class="verse">﴿يَا أَيُّهَا النَّاسُ إِنَّا خَلَقْنَاكُمْ مِنْ ذَكَرٍ وَأُنْثَى وَجَعَلْنَاكُمْ شُعُوبًا وَقَبَائِلَ لِتَعَارَفُوا﴾</p>
+    <p class="src">سورة الحجرات، من الآية ١٣.</p>
+  </div>
+  <div class="box law">
+    <div class="tag">السنع والقانون</div>
+    <p>يجرّم القانون التمييز بين الأفراد أو الجماعات على أساس الدين أو العرق أو اللون أو الأصل، وخطاب الكراهية وازدراء الأديان.</p>
+    <p class="src">مرسوم بقانون اتحادي رقم (٣٤) لسنة ٢٠٢٣ في شأن مكافحة التمييز والكراهية والتطرف، الذي ألغى المرسوم بقانون رقم (٢) لسنة ٢٠١٥.</p>
+  </div>
+
+  <div class="box act">
+    <div class="tag">نشاط · عام الأسرة · المستوى الثالث</div>
+    <p><b>مبادرة «جمعة الأسرة»:</b> يصمّم فريق من الطلاب مبادرة مدرسية تعيد لقاء الأجداد بالأحفاد مرة في الشهر، بأهداف ومؤشرات نجاح وخطة تنفيذ.</p>
+  </div>
+
+  <div class="assess" id="u5-assess">
+    <h3>المراجعة والتقييم</h3>
+    <h4>أولاً: اختر الإجابة الصحيحة</h4>
+    <ol>
+      <li>من سنع البرّ بالوالدين:<div class="opts"><span>أ) الإشارة باليد في وجهيهما</span><span>ب) تقبيل الرأس واليد</span><span>ج) رفع الصوت عند الخلاف</span></div></li>
+      <li>يحدّد قانون حقوق كبار المواطنين الفئة المشمولة بمن بلغ:<div class="opts"><span>أ) ٥٠ عاماً</span><span>ب) ٥٥ عاماً</span><span>ج) ٦٠ عاماً</span><span>د) ٧٠ عاماً</span></div></li>
+      <li>المثل الموثَّق في المصادر بمعنى «صديقك بمنزلة أنفك» هو:<div class="opts"><span>أ) جارك خشمك</span><span>ب) ربيعك خشمك</span><span>ج) الجار جار ولو جار</span></div></li>
+      <li>القانون الذي يحمي خصوصية الطفل وأمانه النفسي:<div class="opts"><span>أ) قانون «وديمة»</span><span>ب) قانون المرور</span><span>ج) قانون العمل</span></div></li>
+    </ol>
+    <h4>ثانياً: ضع علامة (✓) أو (✗) وصحّح الخطأ</h4>
+    <ol>
+      <li>يجوز تزويج البنت دون رضاها إذا وافق وليّها. ( )</li>
+      <li>من حقوق الجار ستر ما يُطَّلع عليه من أسراره. ( )</li>
+      <li>التعايش يقتضي أن يتشبّه الإماراتي بغيره في كل عاداته. ( )</li>
+    </ol>
+    <h4>ثالثاً: أجب بإيجاز</h4>
+    <ol>
+      <li><span class="chip lv">م١</span> اذكر ثلاثة من حقوق الجار.</li>
+      <li><span class="chip lv">م٢</span> كيف أثّرت رحلات الغوص في مكانة المرأة الإماراتية؟</li>
+      <li><span class="chip lv">م٣</span> انتقلت الأسرة من الممتدة إلى النووية. ما الذي خسرناه؟ وكيف يعوّضه السنع؟</li>
+    </ol>
+    <h4>رابعاً: موقف وتصرّف</h4>
+    <ol>
+      <li>جارك المقيم من بلد آخر يحتفل بمناسبة خاصة به ودعاك. كيف تتصرف بسنع يحفظ الودّ والهوية معاً؟</li>
+      <li>لاحظت أن جدّك يجلس وحيداً كثيراً منذ انشغال الأسرة. ماذا تقترح؟</li>
+    </ol>
+    <details class="key"><summary>مفتاح الإجابة للمعلم</summary><div>
+      <p>أولاً: ١-ب، ٢-ج، ٣-ب، ٤-أ.</p>
+      <p>ثانياً: ١ (✗) يحظر القانون ذلك والسنع يأباه؛ ٢ (✓)؛ ٣ (✗) التعايش احترام متبادل مع حفظ الهوية.</p>
+      <p>رابعاً-١: تلبية الدعوة أو الاعتذار بلطف، والتهنئة بما لا يخالف المعتقد، وحفظ الودّ.</p>
+    </div></details>
+  </div>
+</section>
+
+<!-- ===================== الوحدة السادسة ===================== -->
+<section class="part" id="u6">
+  <div class="part-head">
+    <div class="unit-band"><span class="unit-num">٦</span><div><div class="eyebrow">الوحدة السادسة · من الفصل الثالث في المسودة</div><h2>سنع المناسبات والملبس</h2></div></div>
+    <p class="lead">رمضان والأعياد، واللباس الإماراتي للرجال والنساء، والطيب والزينة.</p>
+  </div>
+
+  <h3 id="u6-out">نواتج التعلّم</h3>
+  <div class="levels">
+    <div class="lvl"><h5>المستوى الأول (٦–٧)</h5><ul><li>يصف عادات رمضان والعيد.</li><li>يسمّي قطع اللباس التقليدي.</li></ul></div>
+    <div class="lvl"><h5>المستوى الثاني (٨–٩)</h5><ul><li>يفسّر دلالة اللباس على الهوية والمقام.</li><li>يميّز لباس المناسبة الرسمية.</li></ul></div>
+    <div class="lvl"><h5>المستوى الثالث (١٠–١٢)</h5><ul><li>يناقش اللباس الوطني بين الأصالة والموضة.</li><li>يربط عناصر الزينة بقوائم التراث العالمي.</li></ul></div>
+  </div>
+
+  <h3 id="u6-l1">الدرس الأول: رمضان</h3>
+  <div class="prose">
+    <p>يلتقي أهل الإمارات في صلاة التراويح أول ليلة من رمضان، ويتبادلون التهنئة في المسجد والطرقات: «مبارك عليكم الشهر». ويُعدّون من طعام الإفطار ما يفوق حاجتهم ليوزّعوه على الجيران وأهل الحي، ولا يعيدون طبقاً جاءهم فارغاً أبداً. ثم يتزاورون في المجالس من الليلة الثانية، ويبدؤون بالأرحام. ومن أفطر لعذر لا يأكل علناً ولا أمام صائم. ويوزّعون قبل العيد زكاة الفطر، ويسمّونها «الفطرة»، من الأرز أو التمر.</p>
+  </div>
+  <h3 id="u6-l2">الدرس الثاني: الأعياد</h3>
+  <div class="prose">
+    <p>يخرج الكبار والصغار، رجالاً ونساءً، إلى المصلى لصلاة العيد، ثم يتبادلون التهنئة: «عيدكم مبارك». ويعدّون المبادرة بزيارة الأرحام والجيران صباح العيد من ضرورات العيد. ويعطون «العيدية» للصغار، ويفتحون بيوتهم لكل مهنّئ، ولا يردّون أحداً ولو كان بينهم وبينه خصومة. ويتميّز عيد الأضحى بالأضاحي، فيُحمل لحمها إلى الجار والبعيد.</p>
+  </div>
+
+  <h3 id="u6-l3">الدرس الثالث: لباس الرجل</h3>
+  <ul class="list">
+    <li><b>الكندورة</b> أو «العربية»: ثوب طويل معتدل يبلغ الكعبين، أبيض في الغالب صيفاً، وقد يكون بألوان هادئة شتاءً، بلا ياقة ممتدة. ولا يلبس الرجل الألوان والزخارف الخاصة بلباس النساء.</li>
+    <li><b>الغترة</b> البيضاء و<b>العقال</b> الأسود، أو <b>العصامة</b>. وقد يضع كبار السن ورجال الدين العقال الأبيض. <span class="chip warn">يُوثَّق</span></li>
+    <li><b>البشت</b> فوق الثوب في المناسبات الرسمية والوجاهة، وقد يلبسه الشيوخ والأعيان دائماً.</li>
+    <li>تحت الثوب: «الفانيلة» القطنية البيضاء و«الإزار».</li>
+    <li>لا يتزيّن الرجل بالذهب، ويكثر من دهن العود والورد والتبخّر بالعود.</li>
+    <li>يندر خروجه إلى الصلاة والمجالس حاسر الرأس أو بغير لباسه، إلا في الرياضة وركوب الخيل والبحر.</li>
+  </ul>
+  <h3 id="u6-l4">الدرس الرابع: لباس المرأة <span class="chip lv">مضاف</span></h3>
+  <ul class="list">
+    <li><b>الكندورة النسائية</b> أو الثوب، مع <b>السروال</b>، وتُزيَّن بالتطريز ومنه «التلّي».</li>
+    <li><b>الشيلة</b> لتغطية الرأس، و<b>العباءة</b> السوداء عند الخروج.</li>
+    <li><b>البرقع</b> عند بعض النساء الكبيرات، وهو من رموز الذاكرة الإماراتية.</li>
+    <li>الحنّاء والطيب والبخور في المناسبات ومجالس النساء.</li>
+  </ul>
+  <div class="box edit"><div class="tag">ملاحظة للجنة المنهج</div><p>المسودة الأصلية اقتصرت على لباس الرجل؛ وهذا الدرس مضاف ويحتاج مراجعة من باحثة تراث إماراتية، ومطابقة مسمياته المحلية بين الإمارات.</p></div>
+  <div class="box mawruth">
+    <div class="tag">من التراث العالمي</div>
+    <p>من عناصر هذه الوحدة ما سُجّل في القائمة التمثيلية لليونسكو بملفات شاركت فيها الإمارات: التلّي (٢٠٢٢)، والحنّاء (٢٠٢٤)، والبشت (٢٠٢٥).</p>
+    <p class="src">موقع اليونسكو للتراث الثقافي غير المادي، صفحة الإمارات العربية المتحدة.</p>
+  </div>
+
+  <div class="assess" id="u6-assess">
+    <h3>المراجعة والتقييم</h3>
+    <h4>أولاً: اختر الإجابة الصحيحة</h4>
+    <ol>
+      <li>«الفطرة» في عُرف أهل الإمارات هي:<div class="opts"><span>أ) وجبة الإفطار</span><span>ب) زكاة الفطر</span><span>ج) العيدية</span></div></li>
+      <li>يُلبس البشت في:<div class="opts"><span>أ) الرياضة</span><span>ب) المناسبات الرسمية</span><span>ج) البيت</span></div></li>
+      <li>من العناصر التي سُجّلت في اليونسكو عام ٢٠٢٤:<div class="opts"><span>أ) الحنّاء</span><span>ب) المجالس</span><span>ج) الصقارة</span></div></li>
+    </ol>
+    <h4>ثانياً: ضع علامة (✓) أو (✗) وصحّح الخطأ</h4>
+    <ol>
+      <li>يعيد أهل الإمارات طبق الجيران فارغاً. ( )</li>
+      <li>يُردّ الخصم إذا جاء مهنّئاً بالعيد. ( )</li>
+    </ol>
+    <h4>ثالثاً: أجب بإيجاز</h4>
+    <ol>
+      <li><span class="chip lv">م١</span> صف صباح العيد في بيتكم بثلاث جمل.</li>
+      <li><span class="chip lv">م٢</span> لماذا لا يأكل المفطر لعذر أمام الصائم؟</li>
+      <li><span class="chip lv">م٣</span> هل اللباس الوطني رمز هوية أم عادة اجتماعية؟ ناقش.</li>
+    </ol>
+    <h4>رابعاً: مهمة أداء</h4>
+    <p>يعدّ الطالب «بطاقة تعريف» مصوّرة بلباس إماراتي واحد (اسمه، ومتى يُلبس، ودلالته)، ويعرضها في دقيقتين.</p>
+    <details class="key"><summary>مفتاح الإجابة للمعلم</summary><div>
+      <p>أولاً: ١-ب، ٢-ب، ٣-أ.</p>
+      <p>ثانياً: ١ (✗) لا يعيدونه فارغاً أبداً؛ ٢ (✗) لا يُردّ أحد ولو كانت بينهم خصومة.</p>
+    </div></details>
+  </div>
+</section>
+
+<!-- ===================== الوحدة السابعة ===================== -->
+<section class="part" id="u7">
+  <div class="part-head">
+    <div class="unit-band"><span class="unit-num">٧</span><div><div class="eyebrow">الوحدة السابعة · من الفصل الثالث في المسودة</div><h2>مكارم الأخلاق العامة</h2></div></div>
+    <p class="lead">صفات السنيع: الكرم، وعزّة النفس، والتسامح، والتواضع، وحسن الصحبة، والفزعة، وصداقة البيئة، والهواية النافعة.</p>
+  </div>
+
+  <h3 id="u7-out">نواتج التعلّم</h3>
+  <div class="levels">
+    <div class="lvl"><h5>المستوى الأول (٦–٧)</h5><ul><li>يصف صفات السنيع.</li><li>يختار رفقة صالحة.</li></ul></div>
+    <div class="lvl"><h5>المستوى الثاني (٨–٩)</h5><ul><li>يمارس ردّ الإساءة بالإحسان.</li><li>يشارك في عمل تطوعي.</li></ul></div>
+    <div class="lvl"><h5>المستوى الثالث (١٠–١٢)</h5><ul><li>يربط أخلاق البيئة بالاستدامة.</li><li>يحلّل الفزعة بوصفها قيمة مواطنة.</li></ul></div>
+  </div>
+
+  <h3 id="u7-l1">الدرس الأول: صفات السنيع</h3>
+  <div class="grid2">
+    <div class="box asl"><div class="tag">الكرم</div><p>سخيّ النفس، يعين على نوائب الحياة، ويبذل ما في يده لمن طلبه. ومن عبارات المواساة عند المصيبة: «ابشر بالعوض».</p></div>
+    <div class="box asl"><div class="tag">الشفاعة والسعي</div><p>يشفع في أمور الناس ويسعى في قضاء حوائجهم.</p></div>
+    <div class="box asl"><div class="tag">عزّة النفس</div><p>يأكل من كسب يده، ولا يعيش على عطايا الناس.</p></div>
+    <div class="box asl"><div class="tag">التسامح</div><p>طاهر القلب، لا يحمل على أحد، وإن اعتذر إليه أحد قبل عذره. ويصف أهل الإمارات الحاقد بـ«سواد القلب».</p></div>
+    <div class="box asl"><div class="tag">التواضع</div><p>متواضع مع الصغير والغريب والفقير، يجري على لسانه كلم المجاملة والثناء.</p></div>
+    <div class="box asl"><div class="tag">ردّ الإساءة بالإحسان</div><p>تصرّفه نابع من أخلاقه وتربيته، لا من تصرّف الآخرين معه. «ردّ الشينة بالزينة» <span class="chip warn">يُوثَّق</span>.</p></div>
+  </div>
+  <div class="box mawruth">
+    <div class="tag">من الموروث</div>
+    <p class="verse">وان يسّر الله في يديك فلا … تكن ابخيل ذميم للعطا منّاع</p>
+    <p class="src">الماجدي بن ظاهر، في الحث على الكرم والبذل للأرامل واليتامى وابن السبيل.</p>
+  </div>
+  <div class="box edit"><div class="tag">ملاحظة تحريرية</div><p>حُجب بيتان من شعر سالم الجمري أو سالم بن علي العويس (تحديد القائل معلّق، انظر قراءة المجلس) في معنى «كن هيّناً ليّناً واصفح عن المخطئ»، حتى يُوثَّق القائل ويُستأذن أصحاب الحق.</p></div>
+
+  <h3 id="u7-l2">الدرس الثاني: الصحبة الصالحة</h3>
+  <div class="prose"><p>يتخيّر السنيع أصحابه ممن يُفخر بهم ويعزّونه ويعزّهم، ويبتعد عن أصحاب السوء؛ لأن المرء يتأثر بجليسه مهما تحرّز.</p></div>
+  <div class="box asl">
+    <div class="tag">من أصول السنع</div>
+    <p class="quote">«إنما مثل الجليس الصالح وجليس السوء كحامل المسك ونافخ الكير؛ فحامل المسك إما أن يُحذيَك، وإما أن تبتاع منه، وإما أن تجد منه ريحاً طيبة، ونافخ الكير إما أن يحرق ثيابك، وإما أن تجد منه ريحاً منتنة».</p>
+    <p class="src">متفق عليه: صحيح البخاري (٢١٠١، ٥٥٣٤)، وصحيح مسلم (٢٦٢٨)، من حديث أبي موسى الأشعري رضي الله عنه.</p>
+  </div>
+  <div class="box mawruth">
+    <div class="tag">من الموروث</div>
+    <p class="verse">واذا بغيت انك تصاحب صاحب … لا تصحب الا جيّد الاطباعِ</p>
+    <p class="src">الماجدي بن ظاهر.</p>
+    <p class="quote">«من برك مع اليرب في مبركهم، ما سلم من يربهم». <span class="chip warn">يُوثَّق</span></p>
+    <p class="src">أي من جالس الإبل الجرباء أصابه جربها؛ دعوة إلى مجانبة أهل السوء.</p>
+  </div>
+
+  <h3 id="u7-l3">الدرس الثالث: الفزعة والعمل التطوعي <span class="chip lv">مضاف</span></h3>
+  <div class="prose">
+    <p>«الفزعة» هي المبادرة إلى نجدة المحتاج دون أن يُطلب منك. كانت تظهر في بناء البيت، وفي إنقاذ الغريق، وفي إطفاء الحريق، وفي إعانة أهل العرس والعزاء. واليوم تمتد الفزعة إلى التطوع في الأزمات والأنشطة المجتمعية والمدرسية، وهي في جوهرها السنع ذاته: أن ترى حاجة غيرك حاجتك.</p>
+  </div>
+
+  <h3 id="u7-l4">الدرس الرابع: صديق البيئة</h3>
+  <div class="prose">
+    <p>السنيع صديق مقدّر لبيئته؛ لا يتلف المكان الذي يعيش فيه، ويحافظ على نباتاته وأشجاره، ولا يجور على نعم الله: فيعيد السمك الصغير إلى البحر، ولا يقطع الشجر الأخضر بل يحتطب من اليابس، ولا يجور في صيده وإن كثر الصيد. وهذه الأخلاق الموروثة هي ما يُسمّى اليوم «الاستدامة».</p>
+  </div>
+
+  <h3 id="u7-l5">الدرس الخامس: الهوايات والرياضات</h3>
+  <div class="prose">
+    <p>ربط انتماء أهل الإمارات إلى أرضهم بهوايات قريبة من بيئتهم: الصحراء والبحر والجبل. ومن السنع أن يكون للفتى والفتاة هواية نافعة تشغلهما عن كثرة المجالس المضرّة والتسكّع، وتكسبهما:</p>
+  </div>
+  <ul class="list">
+    <li>أخوّة الأصحاب في صحبة منتجة.</li>
+    <li>الصبر على شظف العيش والخشونة.</li>
+    <li>الروح الرياضية ونبذ التعصب.</li>
+    <li>تعزيز الهوية بممارسة ألعاب الآباء والأجداد ورياضاتهم، كالصقارة وسباقات الهجن والرماية والتجديف الشراعي.</li>
+  </ul>
+  <div class="box mawruth">
+    <div class="tag">من الموروث</div>
+    <p class="verse">الفخر ما يشريه المال حاشا … ولا من هاب يوم اجتماعي</p>
+    <p class="verse">الفخر يشريه الفتى طايل الباع … إلّي على الشدّات ما به ارتياعي</p>
+    <p class="src">مبارك بن حمد العقيلي، على رواية المسودة.</p>
+  </div>
+
+  <div class="assess" id="u7-assess">
+    <h3>المراجعة والتقييم</h3>
+    <h4>أولاً: اختر الإجابة الصحيحة</h4>
+    <ol>
+      <li>شبّه النبي ﷺ الجليس الصالح بـ:<div class="opts"><span>أ) نافخ الكير</span><span>ب) حامل المسك</span><span>ج) الصيّاد</span></div></li>
+      <li>«ابشر بالعوض» تُقال عند:<div class="opts"><span>أ) النجاح</span><span>ب) المصيبة والخسارة</span><span>ج) الزواج</span></div></li>
+      <li>السمك الصغير عند السنيع:<div class="opts"><span>أ) يُباع</span><span>ب) يُعاد إلى البحر</span><span>ج) يُرمى</span></div></li>
+    </ol>
+    <h4>ثانياً: أجب بإيجاز</h4>
+    <ol>
+      <li><span class="chip lv">م١</span> اختر صفة من صفات السنيع، واذكر موقفاً رأيت فيه أحداً يتحلّى بها.</li>
+      <li><span class="chip lv">م٢</span> اشرح المثل «من برك مع اليرب ما سلم من يربهم» واربطه بحديث الجليس الصالح.</li>
+      <li><span class="chip lv">م٣</span> «أخلاق البيئة في الموروث الإماراتي سبقت مفهوم الاستدامة». ناقش بأمثلة.</li>
+    </ol>
+    <h4>ثالثاً: موقف وتصرّف</h4>
+    <p>أساء إليك زميل أمام الصف، ثم جاءك في اليوم التالي محتاجاً إلى مساعدتك في الدرس. ماذا يفعل السنيع؟ ولماذا؟</p>
+    <h4>رابعاً: مهمة أداء</h4>
+    <p>ساعة فزعة: ينفّذ الصف عملاً تطوعياً في المدرسة أو الحي، ويكتب كل طالب تأملاً من خمسة أسطر.</p>
+    <details class="key"><summary>مفتاح الإجابة للمعلم</summary><div>
+      <p>أولاً: ١-ب، ٢-ب، ٣-ب.</p>
+      <p>ثالثاً: يساعده، لأن ردّ السنيع نابع من خُلقه لا من تصرّف غيره، وقد يفتح ذلك باب الصلح.</p>
+    </div></details>
+  </div>
+</section>
+
+<!-- ===================== الوحدة الثامنة ===================== -->
+<section class="part" id="u8">
+  <div class="part-head">
+    <div class="unit-band"><span class="unit-num">٨</span><div><div class="eyebrow">الوحدة الثامنة · وحدة مضافة</div><h2>السنع الرقمي والمعاصر</h2></div></div>
+    <p class="lead">المجلس الافتراضي، والخصوصية والتصوير، وسنع المدرسة، والأماكن العامة، والسفر وتمثيل الوطن.</p>
+  </div>
+
+  <h3 id="u8-out">نواتج التعلّم</h3>
+  <div class="levels">
+    <div class="lvl"><h5>المستوى الأول (٦–٧)</h5><ul><li>يطبّق آداب المحادثة الجماعية.</li><li>يستأذن قبل تصوير أحد.</li><li>يحترم المعلم والزميل.</li></ul></div>
+    <div class="lvl"><h5>المستوى الثاني (٨–٩)</h5><ul><li>ينقل آداب المجلس إلى الفضاء الرقمي.</li><li>يميّز الشائعة ولا ينشرها.</li><li>يعرف حدود القانون في الخصوصية.</li></ul></div>
+    <div class="lvl"><h5>المستوى الثالث (١٠–١٢)</h5><ul><li>يحلّل أثر وسائل التواصل في القيم.</li><li>يصوغ ميثاق سنع رقمي لصفّه.</li><li>يمثّل وطنه بسنع في السفر.</li></ul></div>
+  </div>
+
+  <h3 id="u8-l1">الدرس الأول: المجلس الافتراضي</h3>
+  <div class="prose"><p>مجموعات المحادثة هي مجالس هذا الزمن، وآداب المجلس تنتقل إليها كما هي.</p></div>
+  <div class="tbl"><table>
+    <thead><tr><th>في المجلس</th><th>في المجموعة الرقمية</th></tr></thead>
+    <tbody>
+      <tr><td>السلام عند الدخول</td><td>تحية مختصرة عند الانضمام، لا رسائل متتابعة بلا داعٍ.</td></tr>
+      <tr><td>تقديم الكبير في الكلام</td><td>إفساح المجال لكبار المجموعة، وعدم مقاطعة النقاش بموضوع آخر.</td></tr>
+      <tr><td>خفض الصوت</td><td>لا رسائل بأحرف كبيرة أو صراخ، ولا رسائل صوتية طويلة في غير موضعها.</td></tr>
+      <tr><td>حفظ السرّ</td><td>لا يُنقل ما كُتب في مجموعة خاصة إلى غيرها، ولا تُصوَّر المحادثة وتُنشر.</td></tr>
+      <tr><td>الترفّع عن الغيبة</td><td>لا سخرية ولا تعليقات على أشكال الناس أو أخطائهم.</td></tr>
+      <tr><td>التوقيت المناسب للزيارة</td><td>لا مراسلة في أوقات النوم والصلاة إلا لضرورة.</td></tr>
+      <tr><td>«ما بعد العود قعود»</td><td>معرفة متى يُنهى الحديث، وعدم إثقال الآخرين بالرسائل.</td></tr>
+      <tr><td>«الوصاة حصاة»</td><td>نقل الخبر كما هو، والتثبّت قبل إعادة النشر.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3 id="u8-l2">الدرس الثاني: الخصوصية والتصوير</h3>
+  <div class="prose"><p>كان السنيع لا ينظر في باب مفتوح؛ واليوم صارت الكاميرا باباً مفتوحاً على بيوت الناس. فلا يصوّر أحداً دون إذنه، ولا ينشر صورة مصاب أو متوفى، ولا يلتقط صور البيوت والنساء والضيوف في المجالس.</p></div>
+  <div class="box law">
+    <div class="tag">السنع والقانون</div>
+    <p>يجرّم القانون الاعتداء على خصوصية الشخص أو أسرته دون رضاه بوسيلة تقنية، ومن ذلك: التقاط صور الغير في مكان عام أو خاص أو نشرها، ونشر أخبار أو صور تخصّهم بقصد الإضرار بهم، وتصوير المصابين أو المتوفين في الحوادث ونشر صورهم دون إذن.</p>
+    <p class="src">مرسوم بقانون اتحادي رقم (٣٤) لسنة ٢٠٢١ في شأن مكافحة الشائعات والجرائم الإلكترونية، المادة ٤٤.</p>
+  </div>
+  <div class="box asl">
+    <div class="tag">من أصول السنع</div>
+    <p class="verse">﴿يَا أَيُّهَا الَّذِينَ آمَنُوا إِنْ جَاءَكُمْ فَاسِقٌ بِنَبَإٍ فَتَبَيَّنُوا﴾</p>
+    <p class="src">سورة الحجرات، من الآية ٦.</p>
+  </div>
+
+  <h3 id="u8-l3">الدرس الثالث: سنع المدرسة</h3>
+  <ul class="list">
+    <li>المعلم في مقام الكبير: يُحيّا، ويُقام له، ولا يُقاطَع، ولا يُرفع الصوت في حضرته.</li>
+    <li>الصف مجلس: لكل متحدث دوره، ولا سخرية من خطأ زميل.</li>
+    <li>الطالب الجديد «خطّار»: يُرحَّب به ويُعرَّف بالمكان والزملاء.</li>
+    <li>العامل في المدرسة يُحيّا ويُشكر، ويُترك المكان نظيفاً كما كان.</li>
+  </ul>
+
+  <h3 id="u8-l4">الدرس الرابع: الأماكن العامة والسفر</h3>
+  <ul class="list">
+    <li>في المسجد والمركز التجاري والمستشفى: خفض الصوت، واحترام الطابور، وإفساح المكان لكبير السن وذوي الإعاقة.</li>
+    <li>في المرافق العامة: الحفاظ عليها كما يُحافظ على فناء البيت.</li>
+    <li>في السفر: المسافر سفير بلده؛ يحترم قوانين البلد المضيف وعاداته، ويحفظ هيئته ولسانه، فيُعرف السنع الإماراتي من سلوكه.</li>
+    <li>ويُكرم الضيف الأجنبي في بلدنا بالترحيب وحسن الدلالة، فهو «خطّار» البلد كله.</li>
+  </ul>
+  <div class="box act">
+    <div class="tag">نشاط · المستوى الثالث</div>
+    <p><b>ميثاق السنع الرقمي:</b> يكتب الصف ميثاقاً من عشرة بنود لمجموعته الرقمية، يربط كل بند بأدب من آداب المجلس ومصدره، ويوقّع عليه الطلاب ويُعلَّق في الصف.</p>
+  </div>
+
+  <div class="assess" id="u8-assess">
+    <h3>المراجعة والتقييم</h3>
+    <h4>أولاً: اختر الإجابة الصحيحة</h4>
+    <ol>
+      <li>قبل إعادة نشر خبر وصلك في مجموعة:<div class="opts"><span>أ) تنشره فوراً</span><span>ب) تتثبّت من صحته ومصدره</span><span>ج) تضيف إليه تعليقاً</span></div></li>
+      <li>تصوير المصابين في حادث ونشر صورهم دون إذن:<div class="opts"><span>أ) عمل إخباري مباح</span><span>ب) مخالف للسنع ومجرَّم قانوناً</span><span>ج) جائز للتحذير</span></div></li>
+      <li>رقم المرسوم بقانون الخاص بمكافحة الشائعات والجرائم الإلكترونية:<div class="opts"><span>أ) ٣ لسنة ٢٠١٦</span><span>ب) ٣٤ لسنة ٢٠٢١</span><span>ج) ٩ لسنة ٢٠١٩</span></div></li>
+    </ol>
+    <h4>ثانياً: ضع علامة (✓) أو (✗) وصحّح الخطأ</h4>
+    <ol>
+      <li>يجوز تصوير محادثة خاصة ونشرها إذا كان فيها خطأ لصاحبها. ( )</li>
+      <li>الطالب الجديد في الصف «خطّار» يُرحَّب به. ( )</li>
+      <li>المسافر غير مطالب باحترام عادات البلد المضيف. ( )</li>
+    </ol>
+    <h4>ثالثاً: أجب بإيجاز</h4>
+    <ol>
+      <li><span class="chip lv">م١</span> اكتب ثلاث قواعد لمجموعة صفك على الهاتف.</li>
+      <li><span class="chip lv">م٢</span> اختر أدباً من آداب المجلس، وبيّن كيف يُطبَّق رقمياً.</li>
+      <li><span class="chip lv">م٣</span> هل أضعفت وسائل التواصل السنع أم أعطته مجالاً جديداً؟ اكتب مقالة قصيرة بحجتين لكل جانب ورأيك.</li>
+    </ol>
+    <h4>رابعاً: موقف وتصرّف</h4>
+    <ol>
+      <li>أرسل زميل في مجموعة الصف صورة لزميل آخر نائماً في الحافلة ساخراً منه. ماذا تفعل؟</li>
+      <li>وصلتك رسالة صوتية فيها خبر مثير عن حادث في مدينتك. ما خطواتك؟</li>
+    </ol>
+    <details class="key"><summary>مفتاح الإجابة للمعلم</summary><div>
+      <p>أولاً: ١-ب، ٢-ب، ٣-ب.</p>
+      <p>ثانياً: ١ (✗) حفظ السرّ أدب، والنشر قد يقع تحت طائلة القانون؛ ٢ (✓)؛ ٣ (✗) المسافر سفير بلده.</p>
+      <p>رابعاً-١: لا يتفاعل مع الصورة ولا يعيد نشرها، وينصح المرسل بحذفها، ويبلّغ المعلم إن لزم.</p>
+      <p>رابعاً-٢: لا ينشرها، ويرجع إلى المصادر الرسمية.</p>
+    </div></details>
+  </div>
+</section>
+
+<!-- ===================== المشروع البحثي ===================== -->
+<section class="part" id="research">
+  <div class="part-head">
+    <div class="eyebrow">النشاط الدراسي الختامي · للبحث وتنمية القدرات</div>
+    <h2>مشروع «راوي السنع»</h2>
+    <p class="lead">يتحوّل الطالب من متلقٍّ للسنع إلى جامعٍ له وموثّقٍ لمصادره: يحاور كبار السن، ويتحقق من الأمثال، ويقدّم ما وجده لمجتمعه المدرسي.</p>
+  </div>
+
+  <h3 id="r-goals">القدرات التي ينمّيها المشروع</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>القدرة</th><th>كيف تُنمّى في المشروع</th></tr></thead>
+    <tbody>
+      <tr><td>البحث والتوثيق</td><td>صياغة سؤال، وجمع مادة من ثلاثة مصادر، وتسجيل الإسناد بدقة.</td></tr>
+      <tr><td>التفكير الناقد</td><td>التمييز بين المروي والموثَّق، وبين الرأي والمعلومة.</td></tr>
+      <tr><td>التواصل</td><td>إجراء مقابلة محترمة، وعرض النتائج شفهياً وكتابياً.</td></tr>
+      <tr><td>التعاون</td><td>توزيع الأدوار في فريق، وإدارة الوقت.</td></tr>
+      <tr><td>الوعي الثقافي والهوية</td><td>ربط ما جُمع بالقيم والمصادر ومقارنته بين الإمارات.</td></tr>
+      <tr><td>الكفاءة الرقمية والأخلاقية</td><td>التسجيل بإذن، وحفظ الخصوصية، والنشر المسؤول.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3 id="r-tracks">مسارات المشروع حسب المستوى</h3>
+  <div class="levels">
+    <div class="lvl"><h5>المستوى الأول (٦–٧) · مشروع مصغّر</h5><ul><li>مقابلة واحدة مع أحد أفراد الأسرة الكبار.</li><li>جمع ثلاثة آداب وثلاث عبارات مأثورة.</li><li>المنتج: بطاقة مصوّرة أو ملصق.</li><li>المدة: ٣ أسابيع.</li></ul></div>
+    <div class="lvl"><h5>المستوى الثاني (٨–٩) · مشروع متوسط</h5><ul><li>مقابلتان مع راويين مختلفين.</li><li>التحقق من مثلين من قائمة «يُوثَّق».</li><li>المنتج: تقرير من ٨٠٠ كلمة وعرض ٥ دقائق.</li><li>المدة: ٥ أسابيع.</li></ul></div>
+    <div class="lvl"><h5>المستوى الثالث (١٠–١٢) · مشروع كامل</h5><ul><li>ثلاث مقابلات أو أكثر من إمارات أو بيئات مختلفة.</li><li>مقارنة بين المروي والمصادر المنشورة.</li><li>المنتج: ورقة بحثية (١٥٠٠–٢٥٠٠ كلمة) مع ملحق تسجيلات بإذن، وعرض أمام لجنة.</li><li>المدة: ٨ أسابيع.</li></ul></div>
+  </div>
+
+  <h3 id="r-steps">مراحل المشروع</h3>
+  <figure class="fig">
+    <svg viewBox="0 0 760 140" width="100%" role="img" aria-label="ست مراحل متتابعة: السؤال، التخطيط، الجمع، التوثيق، التحليل، العرض">
+      <g style="font-size:15px">
+        <g><circle cx="700" cy="56" r="30" style="fill:var(--navy)"/><text x="700" y="62" text-anchor="middle" style="fill:var(--sheet);font-weight:700">١</text><text x="700" y="114" text-anchor="middle" style="fill:var(--ink)">السؤال</text></g>
+        <g><circle cx="572" cy="56" r="30" style="fill:var(--navy)"/><text x="572" y="62" text-anchor="middle" style="fill:var(--sheet);font-weight:700">٢</text><text x="572" y="114" text-anchor="middle" style="fill:var(--ink)">التخطيط</text></g>
+        <g><circle cx="444" cy="56" r="30" style="fill:var(--navy)"/><text x="444" y="62" text-anchor="middle" style="fill:var(--sheet);font-weight:700">٣</text><text x="444" y="114" text-anchor="middle" style="fill:var(--ink)">الجمع الميداني</text></g>
+        <g><circle cx="316" cy="56" r="30" style="fill:var(--gold)"/><text x="316" y="62" text-anchor="middle" style="fill:var(--sheet);font-weight:700">٤</text><text x="316" y="114" text-anchor="middle" style="fill:var(--ink)">التوثيق والتحقق</text></g>
+        <g><circle cx="188" cy="56" r="30" style="fill:var(--navy)"/><text x="188" y="62" text-anchor="middle" style="fill:var(--sheet);font-weight:700">٥</text><text x="188" y="114" text-anchor="middle" style="fill:var(--ink)">التحليل</text></g>
+        <g><circle cx="60" cy="56" r="30" style="fill:var(--navy)"/><text x="60" y="62" text-anchor="middle" style="fill:var(--sheet);font-weight:700">٦</text><text x="60" y="114" text-anchor="middle" style="fill:var(--ink)">العرض</text></g>
+        <g style="stroke:var(--line);stroke-width:2"><line x1="668" y1="56" x2="604" y2="56"/><line x1="540" y1="56" x2="476" y2="56"/><line x1="412" y1="56" x2="348" y2="56"/><line x1="284" y1="56" x2="220" y2="56"/><line x1="156" y1="56" x2="92" y2="56"/></g>
+      </g>
+    </svg>
+    <figcaption>شكل ٤: مرحلة التوثيق والتحقق هي قلب المشروع، وفيها يتعلّم الطالب قاعدة «صفر تلفيق».</figcaption>
+  </figure>
+  <ol class="list">
+    <li><b>السؤال:</b> يختار الطالب موضوعاً من بنك الموضوعات، ويصوغ سؤالاً واضحاً، مثل: «كيف تغيّر سنع استقبال الضيف بين جيل جدي وجيلي؟».</li>
+    <li><b>التخطيط:</b> يحدّد الرواة، ويعدّ دليل المقابلة، ويحصل على موافقة ولي الأمر والراوي.</li>
+    <li><b>الجمع الميداني:</b> يجري المقابلة، ويدوّن أو يسجّل بإذن، ويلاحظ ممارسة حية إن أمكن (مجلس، ضيافة).</li>
+    <li><b>التوثيق والتحقق:</b> يقارن كل معلومة بثلاثة مصادر على الأقل: راوٍ ثانٍ، ومرجع منشور، وجهة رسمية. ويضع لكل معلومة شارة: موثَّق / متداول / يحتاج تحققاً.</li>
+    <li><b>التحليل:</b> ما الذي بقي؟ ما الذي تغيّر؟ ولماذا؟ وما القيمة التي يحفظها هذا الأدب؟</li>
+    <li><b>العرض:</b> يقدّم منتجه لصفه أو للجنة، ويستقبل الأسئلة بسنع المجلس.</li>
+  </ol>
+
+  <h3 id="r-bank">بنك الموضوعات</h3>
+  <div class="grid2">
+    <div class="box asl"><div class="tag">توثيق الأمثال المعلّقة</div><p>حقّق في: «الساير ساير على اسنعه»، «ردّ الشينة بالزينة»، «سمّ الرياييل بأساميها»، «جارك خشمك»، «الوصاة حصاة». هل يعرفها الرواة؟ بأي صيغة؟ وفي أي إمارة؟</p></div>
+    <div class="box asl"><div class="tag">مصطلحات تنتظر التوثيق</div><p>«الحشيمة»، صيغ النداء والإذن عند الباب، «التخوت»، وأسماء الدلال ووظائفها في كل إمارة.</p></div>
+    <div class="box asl"><div class="tag">موضوعات مقارنة</div><p>سنع البحر وسنع البر؛ مجالس الرجال ومجالس النساء؛ العيد بين الأمس واليوم؛ القهوة من التاوة إلى الدلّة الحافظة.</p></div>
+    <div class="box asl"><div class="tag">موضوعات معاصرة</div><p>السنع في مجموعات الأسرة الرقمية؛ سنع الطلاب في المدرسة؛ كيف يتعلّم المقيمون السنع الإماراتي؟</p></div>
+  </div>
+
+  <h3 id="r-guide">نموذج دليل المقابلة</h3>
+  <ol class="list">
+    <li>عرّفنا بنفسك: اسمك كما تحب أن يُذكر، وأين نشأت؟</li>
+    <li>من علّمك السنع في صغرك؟ وأين كنت تتعلّمه؟</li>
+    <li>صف لي كيف كان يُستقبل الضيف في بيتكم.</li>
+    <li>هل تذكر مثلاً شعبياً كان يُقال لكم عند الخطأ؟ متى يُقال؟ وماذا يعني؟</li>
+    <li>ما الأدب الذي ترى أن جيلنا فقده؟ ولماذا في رأيك؟</li>
+    <li>ما الذي تحب أن نحافظ عليه نحن؟</li>
+  </ol>
+  <div class="box law">
+    <div class="tag">أخلاقيات البحث والقانون</div>
+    <ul class="list">
+      <li>لا تسجيل صوتي أو مرئي ولا تصوير إلا بموافقة صريحة من الراوي، وموافقة ولي أمر الطالب.</li>
+      <li>يُذكر الراوي باسمه فقط إذا أذن، وإلا يُكتفى بوصفه («راوية من عجمان، ٧٠ عاماً»).</li>
+      <li>لا تُنشر التسجيلات خارج المدرسة دون إذن مكتوب، احتراماً للخصوصية التي يحميها المرسوم بقانون اتحادي رقم (٣٤) لسنة ٢٠٢١.</li>
+      <li>يُنسب كل نص إلى مصدره، ولا يُنقل من بحث منشور دون إشارة إليه.</li>
+    </ul>
+  </div>
+
+  <h3 id="r-rubric">سلّم تقدير المشروع</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>المعيار</th><th>متميز (٤)</th><th>متقدم (٣)</th><th>متمكن (٢)</th><th>مبتدئ (١)</th></tr></thead>
+    <tbody>
+      <tr><td>سؤال البحث</td><td>محدد ودقيق وقابل للإجابة</td><td>واضح مع بعض العموم</td><td>عام</td><td>غائب أو مبهم</td></tr>
+      <tr><td>جودة الجمع الميداني</td><td>مقابلات متعددة غنية وموثّقة بإذن</td><td>مقابلات كافية</td><td>مقابلة واحدة سطحية</td><td>لا مادة ميدانية</td></tr>
+      <tr><td>التوثيق والتحقق</td><td>كل معلومة بشارتها ومصادرها الثلاثة</td><td>أغلب المعلومات موثّقة</td><td>توثيق جزئي</td><td>بلا توثيق</td></tr>
+      <tr><td>التحليل</td><td>يفسّر التغير ويربطه بالقيم</td><td>يصف التغير بوضوح</td><td>يسرد دون تحليل</td><td>نقل حرفي</td></tr>
+      <tr><td>اللغة والعرض</td><td>لغة سليمة وعرض واثق بسنع المجلس</td><td>لغة جيدة وعرض منظم</td><td>أخطاء متفرقة</td><td>عرض مضطرب</td></tr>
+      <tr><td>الأخلاقيات</td><td>التزام تام بالإذن والخصوصية والإسناد</td><td>التزام مع هفوة يسيرة</td><td>إغفال بعض الأذونات</td><td>مخالفة صريحة</td></tr>
+    </tbody>
+  </table></div>
+  <div class="box act"><div class="tag">مخرج جماعي مقترح</div><p>تجمع المدرسة مشاريع الطلاب في «ديوان السنع المدرسي» السنوي، ويُهدى منه نسخة إلى الرواة الذين شاركوا، وتُرفع الأمثال التي وثّقها الطلاب إلى المؤلف لتُضاف إلى الطبعة التالية من الكتاب.</p></div>
+</section>
+
+<!-- ===================== المعجم ===================== -->
+<section class="part" id="glossary">
+  <div class="part-head">
+    <div class="eyebrow">ملحق ١</div>
+    <h2>معجم مفردات السنع</h2>
+  </div>
+  <div class="tbl"><table>
+    <thead><tr><th>المفردة</th><th>معناها</th><th>الحالة</th></tr></thead>
+    <tbody>
+      <tr><td>السنع</td><td>حسن السلوك وأصول التعامل؛ وأصله الفصيح «السنيع: الحسن».</td><td><span class="chip ok">موثَّق</span></td></tr>
+      <tr><td>الميلس</td><td>المجلس بلهجة أهل الإمارات.</td><td><span class="chip ok">موثَّق</span></td></tr>
+      <tr><td>المرامس</td><td>المجالس، من «الرمسة» أي الحديث.</td><td><span class="chip warn">على رواية المؤلف</span></td></tr>
+      <tr><td>البرزة</td><td>مجلس واسع كثير النوافذ للوجهاء في المناطق الساحلية.</td><td><span class="chip ok">موثَّق</span></td></tr>
+      <tr><td>الخطّار</td><td>الضيف الوافد من خارج الحي.</td><td><span class="chip ok">موثَّق</span></td></tr>
+      <tr><td>المعزّب</td><td>المضيف صاحب القهوة.</td><td><span class="chip ok">موثَّق</span></td></tr>
+      <tr><td>الفوالة</td><td>ما يُقدَّم للضيف من طعام خفيف.</td><td><span class="chip ok">موثَّق</span></td></tr>
+      <tr><td>الخمرة، التلقيمة، المزلّة</td><td>الدلال الثلاث من الأكبر إلى الأصغر.</td><td><span class="chip ok">موثَّق</span></td></tr>
+      <tr><td>القنّاد</td><td>ما يُضاف إلى القهوة من هيل وزعفران.</td><td><span class="chip warn">على رواية المؤلف</span></td></tr>
+      <tr><td>الهيف، الضيف، الكيف، السيف</td><td>أسماء الفناجين بحسب ترتيبها.</td><td><span class="chip ok">موثَّق</span></td></tr>
+      <tr><td>الحشيمة</td><td>الاحترام والتوقير لصاحب المجلس.</td><td><span class="chip warn">يُوثَّق</span></td></tr>
+      <tr><td>الخشم</td><td>الأنف؛ والسلام بالخشم تلاقي طرفي الأنف.</td><td><span class="chip ok">متداول</span></td></tr>
+      <tr><td>تواليك</td><td>من وراءك من أهلك.</td><td><span class="chip warn">على رواية المؤلف</span></td></tr>
+      <tr><td>الصينية، الماعون</td><td>الطبق الكبير الذي يُغرف فيه الطعام.</td><td><span class="chip ok">متداول</span></td></tr>
+      <tr><td>الطعّام</td><td>نواة التمر في لهجة أهل الإمارات.</td><td><span class="chip warn">على رواية المؤلف</span></td></tr>
+      <tr><td>التخوت</td><td>كراسٍ خشبية خارج البيوت، مفردها «تخت».</td><td><span class="chip warn">يُوثَّق</span></td></tr>
+      <tr><td>التبخيت</td><td>منح الطفل ناقة أو شاة باسمه هي ونتاجها.</td><td><span class="chip warn">على رواية المؤلف</span></td></tr>
+      <tr><td>الفطرة</td><td>زكاة الفطر.</td><td><span class="chip ok">متداول</span></td></tr>
+      <tr><td>العيدية</td><td>مال يُعطى للأطفال صباح العيد.</td><td><span class="chip ok">موثَّق</span></td></tr>
+      <tr><td>الناموس</td><td>الشرف والفخر؛ «تستاهل الناموس» تهنئة بالفوز.</td><td><span class="chip warn">على رواية المؤلف</span></td></tr>
+      <tr><td>الفزعة</td><td>المبادرة إلى نجدة المحتاج.</td><td><span class="chip ok">متداول</span></td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== ثبت المصادر ===================== -->
+<section class="part" id="refs">
+  <div class="part-head">
+    <div class="eyebrow">ملحق ٢</div>
+    <h2>ثبت المصادر والمراجع</h2>
+    <p class="lead">كل ما في هذا الثبت تحقّق المجلس من وجوده. ولم يُعتمد أي مصدر شيعي.</p>
+  </div>
+  <h3>المصادر الشرعية واللغوية</h3>
+  <ol class="list">
+    <li>القرآن الكريم، برواية حفص عن عاصم.</li>
+    <li>البخاري، محمد بن إسماعيل (ت ٢٥٦هـ). الجامع الصحيح. ترقيم محمد فؤاد عبد الباقي.</li>
+    <li>مسلم بن الحجاج (ت ٢٦١هـ). الصحيح. ترقيم محمد فؤاد عبد الباقي.</li>
+    <li>أحمد بن حنبل (ت ٢٤١هـ). المسند. بيروت: مؤسسة الرسالة.</li>
+    <li>الترمذي، محمد بن عيسى (ت ٢٧٩هـ). السنن. تحقيق أحمد محمد شاكر وآخرين.</li>
+    <li>الحاكم النيسابوري (ت ٤٠٥هـ). المستدرك على الصحيحين.</li>
+    <li>أبو عمرو الشيباني (ت ٢٠٦هـ). كتاب الجيم.</li>
+    <li>أبو عبيد القاسم بن سلّام (ت ٢٢٤هـ). الغريب المصنَّف.</li>
+    <li>الأزهري، محمد بن أحمد (ت ٣٧٠هـ). تهذيب اللغة.</li>
+  </ol>
+  <h3>مراجع إماراتية في السنع للاستزادة</h3>
+  <ol class="list">
+    <li>المطروشي، علي محمد. <i>السنع مفخرة السلوك الإماراتي الرفيع</i>. أبوظبي: وزارة الثقافة وتنمية المعرفة، ٢٠١٧.</li>
+    <li>زغل، محمد فاتح صالح، والمنصوري، فاطمة مسعود نايع. <i>السنع في الإمارات: قيم وعادات المجتمع الإماراتي، منهج الحياة المستدامة</i>. أبوظبي: نادي تراث الإمارات، ٢٠٢٢.</li>
+    <li>بن دلموك، عبدالله حمدان. <i>السنع: قيم خالدة على مر العصور</i>. دبي: مركز حمدان بن محمد لإحياء التراث، ٢٠١٩ (ط٢، ٢٠٢٠).</li>
+    <li>الشحي، خالد. <i>السنع الإماراتي</i>. الشارقة: معهد الشارقة للتراث، ٢٠٢١.</li>
+    <li><i>يعقوب الحاتمي: سيرته وأشعاره</i>. أبوظبي: أكاديمية الشعر، نحو ٢٠١٠.</li>
+    <li><i>ديوان الجمري</i>. أبوظبي: نادي تراث الإمارات.</li>
+  </ol>
+  <h3>التشريعات الاتحادية</h3>
+  <ol class="list">
+    <li>قانون اتحادي رقم (٣) لسنة ٢٠١٦ بشأن حقوق الطفل «وديمة».</li>
+    <li>قانون اتحادي رقم (٩) لسنة ٢٠١٩ بشأن حقوق كبار المواطنين.</li>
+    <li>مرسوم بقانون اتحادي رقم (٣٤) لسنة ٢٠٢١ في شأن مكافحة الشائعات والجرائم الإلكترونية.</li>
+    <li>مرسوم بقانون اتحادي رقم (٣٤) لسنة ٢٠٢٣ في شأن مكافحة التمييز والكراهية والتطرف.</li>
+    <li>مرسوم بقانون اتحادي رقم (٤١) لسنة ٢٠٢٤ بإصدار قانون الأحوال الشخصية.</li>
+  </ol>
+  <p class="small muted">النصوص الرسمية: بوابة التشريعات الاتحادية uaelegislation.gov.ae</p>
+  <h3>مصادر مؤسسية</h3>
+  <ol class="list">
+    <li>UNESCO, Intangible Cultural Heritage: United Arab Emirates — <a href="https://ich.unesco.org/en/state/united-arab-emirates-AE" target="_blank" rel="noopener">ich.unesco.org</a></li>
+    <li>البوابة الرسمية لحكومة الإمارات: مراحل التعليم المدرسي — <a href="https://u.ae/ar/information-and-services/education/school-education-k-12/stages-and-streams-of-school-education" target="_blank" rel="noopener">u.ae</a></li>
+    <li>خبر إطلاق برنامج «السنع الإماراتي»، صحيفة البيان، ١٣ مارس ٢٠٢٢ — <a href="https://www.albayan.ae/uae/education/2022-03-13-1.4390500" target="_blank" rel="noopener">albayan.ae</a></li>
+  </ol>
+</section>
+
+<!-- ===================== سجل التوثيق ===================== -->
+<section class="part" id="verify">
+  <div class="part-head">
+    <div class="eyebrow">ملحق ٣ · للمؤلف ولجنة التحكيم</div>
+    <h2>سجلّ التوثيق والمسائل المعلّقة</h2>
+    <p class="lead">ما يلزم حسمه قبل الاعتماد النهائي للطبعة المدرسية.</p>
+  </div>
+  <div class="tbl"><table>
+    <thead><tr><th>المسألة</th><th>الحالة</th><th>الإجراء المقترح</th></tr></thead>
+    <tbody>
+      <tr><td>تحديد قائل البيتين المنسوبين إلى «سالم بن علي الجمري»</td><td><span class="chip bad">معلّق</span></td><td>مطابقة ديواني الجمري والعويس.</td></tr>
+      <tr><td>بيت حمد بوشهاب في البيان</td><td><span class="chip bad">معلّق</span></td><td>مطابقة الديوان والاستئذان من أصحاب الحق.</td></tr>
+      <tr><td>المثل «الساير ساير على اسنعه» (شعار الكتاب)</td><td><span class="chip warn">يُوثَّق</span></td><td>توثيق من راويين على الأقل، أو الإشارة إلى أنه من رواية المؤلف.</td></tr>
+      <tr><td>أمثال: ردّ الشينة بالزينة، سمّ الرياييل، الوصاة حصاة، فنيال قهوة الضحى، ما عقب القايمة لايمة، اللي يسير بلا دعوة، من برك مع اليرب، عليك بالجار ولو عال</td><td><span class="chip warn">يُوثَّق</span></td><td>جمع ميداني ومطابقة على معاجم الأمثال الإماراتية.</td></tr>
+      <tr><td>«جارك خشمك»</td><td><span class="chip bad">غير موثَّق</span></td><td>الموثَّق «ربيعك خشمك»؛ يُحذف أو يُستبدل.</td></tr>
+      <tr><td>مصطلحات: الحشيمة، التخوت، صيغة النداء والإذن عند الباب</td><td><span class="chip warn">يُوثَّق</span></td><td>جمع ميداني.</td></tr>
+      <tr><td>وظيفة «التلقيمة» بين الجمع والتصفية</td><td><span class="chip warn">اختلاف مصادر</span></td><td>اعتماد رأي خبير تراث معتمد.</td></tr>
+      <tr><td>أرقام مواد قانون «وديمة» بعد تعديله الأخير</td><td><span class="chip warn">يُراجَع</span></td><td>مطابقة النسخة المحدّثة في بوابة التشريعات.</td></tr>
+      <tr><td>درس لباس المرأة</td><td><span class="chip warn">مضاف</span></td><td>مراجعة باحثة تراث إماراتية.</td></tr>
+      <tr><td>الجهة المُصدِرة وكلمتها</td><td><span class="chip warn">معلّق</span></td><td>تنسيق مع وزارة التربية والتعليم وبرنامج «السنع الإماراتي».</td></tr>
+      <tr><td>الأحاديث النبوية الواردة</td><td><span class="chip ok">مخرّجة</span></td><td>خُرّجت من المكتبة الشاملة ومصادرها الأصلية.</td></tr>
+      <tr><td>الآيات القرآنية</td><td><span class="chip ok">مطابقة</span></td><td>طوبقت على رواية حفص.</td></tr>
+      <tr><td>تواريخ اليونسكو والتشريعات والمبادرات</td><td><span class="chip ok">محقّقة</span></td><td>من المصادر الرسمية في أكتوبر ٢٠٢٦.</td></tr>
+    </tbody>
+  </table></div>
+  <footer class="colophon">كتاب السنع · مسودة منهجية للتحكيم · أُعدّت بمنهج المجلس العلمي متعدد التخصصات · أكتوبر ٢٠٢٦</footer>
+</section>
+</main>
+</div>
